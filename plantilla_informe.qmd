@@ -1,8 +1,8 @@
 ---
 title: "Título del trabajo grupal"
-subtitle: "Estadística Correlacional 2023"
-author: "Angela"
-date: "2023-11-07"
+subtitle: "Análisis multinivel 2025"
+author: "Cahuil Ortiz, Juan Prado y Angela Valeria"
+date: "2025-05-28"
 lang: es
 format: html
 editor: visual
