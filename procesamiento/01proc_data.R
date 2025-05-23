@@ -55,3 +55,25 @@ data <- data %>%
 
 # Guardar datos ----------------------------------------------------------------
 save(data,file="output/data.RData")
+
+
+#########################################################
+
+
+library(pacman)
+pacman::p_load(tidyverse, # para sintaxis
+               ggplot2,  
+               rempsyc, # Reporte
+               kableExtra, # Tablas
+               broom,
+               Publish) # Varios
+options(scipen = 999) # para desactivar notacion cientifica
+rm(list = ls())       # para limpar el entonrno de trabajo
+
+
+load(url("https://raw.githubusercontent.com/multinivel-facso/trabajo1-grupo-5/main/input/data/Latinobarometro_2023.rdata"))
+
+
+LatinBase = Latinobarometro_2023_Esp_v1_0 %>% 
+  select(idenpa, P16ST, S2, sexo) %>%
+  as.data.frame()
