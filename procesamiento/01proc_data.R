@@ -2,9 +2,9 @@
 # 
 #                         Universidad de Chile
 #                     Facultad de Ciencias Sociales
-#                    Estadística Correlacional 2023
+#                       Análisis multinivel 2025
 #
-#             Plantilla procesamiento trabajo final curso
+#                         Plantilla procesamiento
 #
 # ******************************************************************************
 
@@ -12,46 +12,51 @@
 # Carga Librerías --------------------------------------------------------------
 
 library(pacman)
-pacman::p_load(tidyverse,   # manipulacion datos
-               sjPlot,      # tablas
-               confintr,    # IC
-               gginference, # visualizacion 
-               rempsyc,     # reporte
-               broom,       # varios
-               sjmisc,      # para descriptivos
-               knitr)       # para       
-
+pacman::p_load(tidyverse, # para sintaxis
+               ggplot2,  
+               rempsyc, # Reporte
+               kableExtra, # Tablas
+               broom,
+               Publish) # Varios
 options(scipen = 999) # para desactivar notacion cientifica
-rm(list = ls()) # para limpiar el entorno de trabajo
+rm(list = ls())       # para limpiar el entorno de trabajo
 
 
 # Carga datos ------------------------------------------------------------------
 
-load("input/data/ELSOC_Long.RData")
+load(url("https://raw.githubusercontent.com/multinivel-facso/trabajo1-grupo-5/main/input/data/Latinobarometro_2023.rdata"))
 
 
 # Limpieza de datos ------------------------------------------------------------
 
 
 ## Filtrar y seleccionar -------------------------------------------------------
-data <- elsoc_long_2016_2022 %>% 
-  filter(ola==1) %>%
-  select(sexo=m0_sexo,edad=m0_edad,nedu=m01,
-         s11_01,s11_02,s11_03,s11_04,s11_05,s11_06,s11_07,s11_08,s11_09)
+LatinBase = Latinobarometro_2023_Esp_v1_0 %>% 
+  select(idenpa, P16ST, S2, sexo) %>%
+  as.data.frame()
 
 
 ## Remover NA's ----------------------------------------------------------------
-data <- data %>% 
-  set_na(., na = c(-888, -999)) %>% 
-  na.omit()
 
 
-## Crear variable nueva --------------------------------------------------------
-data <- data %>% 
-  rowwise() %>%
-  mutate(sint_depresivos = mean(c(s11_01,s11_02,s11_03,s11_04,s11_05,s11_06,s11_07,s11_08,s11_09))) %>% 
-  ungroup()
+
+## Recodificación variables --------------------------------------------------------
+
+LatinBase$idenpa <- factor(LatinBase$idenpa, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19), labels = c("Argentina","Bolivia", "Brasil", "Colombia", "Costa Rica", "Chile", "Ecuador", "El Salvador", "Guatemala", "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", "Perú", "Uruguay", "Venezuela", "España", "República Dominicana"))
 
 
 # Guardar datos ----------------------------------------------------------------
-save(data,file="output/data.RData")
+save(data,file="output/LatinBase.RData")
+
+
+#########################################################
+
+
+
+
+
+
+
+
+
+
