@@ -8,19 +8,17 @@ format: html
 editor: visual
 ---
 
-# Introducción
+# Planteamiento del problema
 
-Aqui ponemos la introducción, de acuerdo con la [pauta](https://correlacional.netlify.app/trabajos).
+Hola
 
-En este ejemplo daremos una mirada a la salud mental, y exploraremos posibles asociaciones con la edad, sexo y nivel educacional.
+# Descripción de los datos
 
-# Variables
-
-Aqui ponemos las variables, de acuerdo con la [pauta](https://correlacional.netlify.app/trabajos).
+Hola
 
 Podemos cargar las librerías sin que aparezca en nuestro informe, señalando la especificación al chunk `echo=FALSE`.
 
-```{r librerias, echo=FALSE, warning=FALSE, message=FALSE, collapse=TRUE}
+```{r librerias, echo=FALSE, message=FALSE, warning=FALSE, collapse=TRUE}
 library(pacman)
 pacman::p_load(tidyverse,   # manipulacion datos
                sjPlot,      # tablas
@@ -95,53 +93,6 @@ En la @tbl-sexo podemos ver que la proporción de mujeres que responde la encues
 tabla1
 ```
 
-# Análisis
+# Bibliografía
 
-Aqui ponemos el análisis, de acuerdo con la [pauta](https://correlacional.netlify.app/trabajos).
-
-En nuestro ejemplo, analizaremos la correlación entre algunas variables.
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-cor_edad_dep <- cor(data$edad, data$sint_depresivos)
-cor_nedu_dep <- cor(data$nedu, data$sint_depresivos)
-cor_nedu_edad <- cor(data$nedu, data$edad)
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-g1 <- data %>% 
-  group_by(nedu) %>% 
-  summarise(sint_dep = mean(sint_depresivos, na.rm = T),
-            edad=mean(edad, na.rm = T))
-
-grafico1 <- ggplot(data = g1,
-       mapping = aes(x = sint_dep, y = edad, label = nedu)) +
-  geom_point() +
-  geom_smooth(method = "lm",colour = "black",fill="lightblue",size=0.5) + 
-  labs(x = "Sintomatología depresiva",
-       y = "Edad",
-       caption = "Fuente: Elaboración propia en base a ELSOC 2026") +
-  theme_bw()
-
-```
-
-En la @fig-cor_edad_dep es posible apreciar... La correlación entre la edad y el promedio de la sintomatología depresiva corresponde a `r cor_edad_dep`.
-
-```{r fig-cor_edad_dep, echo=FALSE}
-#| label: fig-cor_edad_dep
-#| fig-cap: "Correlación entre edad y sintomatología depresiva"
-#| warning: false
-#| message: false
-#| fig-align: center
-#| out-width: 80%
-grafico1
-```
-
-# Conclusiones
-
-Aqui redactamos algunas conclusiones, de acuerdo con la [pauta](https://correlacional.netlify.app/trabajos).
-
-# Biliografía
-
--   COES (2023). *Radiografía del Cambio Social: Análisis de Resultados Longitudinales ELSOC 2016-2022. Presentación de Resultados COES*. Marzo, Santiago de Chile.
-
--   R Core Team (2023). *R: A Language and Environment for Statistical Computing*. R Foundation for Statistical Computing, Vienna, Austria. <https://www.R-project.org/>.
+-   hola
