@@ -43,19 +43,22 @@ latbar2023 <- readRDS("output/latbar2023.RDS")
 
 latbar2023
 
-## Filtrar y seleccionar -------------------------------------------------------
+## Filtrar y recodificaciones -------------------------------------------------------
+
+# Base filtrada
 latbar2023 = latbar2023 %>% 
   select(idenpa, P16ST, S2, sexo) %>%
   as.data.frame()
 
-
-## Remover NA's ----------------------------------------------------------------
-
+# Remover NA
 
 
-## Recodificación variables --------------------------------------------------------
-
+# Etiquetar valores
 latbar2023$idenpa <- factor(latbar2023$idenpa, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19), labels = c("Argentina","Bolivia", "Brasil", "Colombia", "Costa Rica", "Chile", "Ecuador", "El Salvador", "Guatemala", "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", "Perú", "Uruguay", "Venezuela", "España", "República Dominicana"))
+
+# Eliminar España
+latbar2023 <- datos %>%
+  filter(idenpa != "España")
 
 
 ## Estadísticos descriptivos ----------------------------------------------------
