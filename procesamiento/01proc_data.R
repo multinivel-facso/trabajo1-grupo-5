@@ -52,6 +52,13 @@ latbar2023 <- latbar2023 %>% select(clase_scl = S2, tend_politica = P16ST, perc_
 latbar2023 <- latbar2023 %>%
   filter(if_all(everything(), ~ . != -5))
 
+# Etiquetar valores
+
+latbar2023$pais <- factor(latbar2023$pais, levels = c(32,68,76,170,188,152,218,222,320,340,484,591,600,604,858,862,214), labels = c("Argentina","Bolivia", "Brasil", "Colombia", "Costa Rica", "Chile", "Ecuador", "El Salvador", "Guatemala", "Honduras", "México", "Panamá", "Paraguay", "Perú", "Uruguay", "Venezuela", "República Dominicana"))
+
+
+table(latbar2023$pais)
+
 ## Descriptivos generales ----------------------------------------------------
 
 stargazer(latbar2023, title = "Descriptivos generales", type='text')
