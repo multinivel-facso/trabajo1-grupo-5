@@ -4,7 +4,7 @@
 #                     Facultad de Ciencias Sociales
 #                       Análisis multinivel 2025
 #
-#                         Plantilla procesamiento
+#                        Plantilla procesamiento
 #
 # ******************************************************************************
 
@@ -18,68 +18,56 @@ pacman::p_load(tidyverse, # para sintaxis
                kableExtra, # Tablas
                broom,
                Publish,
-               haven) # Varios
+               dplyr,
+               haven,
+               lme4,
+               corrplot,
+               stargazer,
+               texreg)
+            
 options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls())       # para limpiar el entorno de trabajo
 
 
 ## Carga datos SÓLO 1ERA VEZ (para subir la base original al github)------------------------------------------------------------------
 
-Latinobarometro_2023 <- read_sav("~/Downloads/bases/latbar2023/Latinobarometro_2023_Esp_Spss_v1_0.sav")
-saveRDS(Latinobarometro_2023, file = "input/Latinobarometro_2023.RDS")
-## Carga de datos para trabajar---------------------------------------------
+load("input/data/Latinobarometro_2023_Esp_Rdata_v1_0.rdata")
 
-# Base original (sólo antes de las modifcaciones)
-Latinobarometro_2023 <- readRDS("input/Latinobarometro_2023.RDS")
+## Filtrar y recodificaciones --------------------------------------------------
 
-# Base con modificaciones (en adelante)
-latbar2023 <- readRDS("output/latbar2023.RDS")
+latbar2023 <- Latinobarometro_2023_Esp_v1_0 %>%
+  select(sexo, S2, edad, P16ST,
+         P11STGBS.B, P61ST, P41ST.A, P32INN, idenpa) %>%
+  as.data.frame()
+
+latbar2023 <- latbar2023 %>% select(clase_scl = S2, tend_politica = P16ST, perc_economia = P11STGBS.B,
+              perc_desigualdad = P61ST, perc_libertad = P41ST.A, perc_migracion = P32INN,
+              pais = idenpa, edad = edad, sexo = sexo)
+
 
 ## Limpieza de datos ------------------------------------------------------------
 
-
-# BORRAR ESTO CUANDO ANOTEMOS EL CÓDIGO --> para la limpieza de datos en adelante, llamémosla latbar2023
-# para que la Latinobarometro_2023 sea la base original, sin filtrar ni nada
-
-latbar2023
-
-## Filtrar y recodificaciones -------------------------------------------------------
-
-# Base filtrada
-latbar2023 = latbar2023 %>% 
-  select(idenpa, P16ST, S2, sexo) %>%
-  as.data.frame()
-
 # Remover NA
 
+latbar2023 <- latbar2023 %>%
+  filter(if_all(everything(), ~ . != -5))
 
-# Etiquetar valores
-latbar2023$idenpa <- factor(latbar2023$idenpa, levels = c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19), labels = c("Argentina","Bolivia", "Brasil", "Colombia", "Costa Rica", "Chile", "Ecuador", "El Salvador", "Guatemala", "Honduras", "México", "Nicaragua", "Panamá", "Paraguay", "Perú", "Uruguay", "Venezuela", "España", "República Dominicana"))
+## Descriptivos generales ----------------------------------------------------
 
-# Eliminar España
-latbar2023 <- datos %>%
-  filter(idenpa != "España")
+stargazer(latbar2023, title = "Descriptivos generales", type='text')
 
+## Estimación correlación intraclase
 
-## Estadísticos descriptivos ----------------------------------------------------
+# Null model
 
+results_0 = lmer(tend_politica ~ 1 + (1 | pais), data = latbar2023)
+summary(results_0)
 
-## Correlación intraclase, efectos aleatorios, modelos preliminares --------------------
+screenreg(results_0) # de library texreg
 
+# Los componentes del cálculo son: 
 
+30.5/(30.5+582.9)
 
-# Guardar datos ----------------------------------------------------------------
-
-save(data,file="output/data.RData")
-saveRDS(latbar2023, file = "output/latbar2023.RDS")
-#########################################################
-
-
-
-
-
-
-
-
-
+# Resultado -> 0.04972286 correlación intra clase de 5%
 
