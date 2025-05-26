@@ -33,6 +33,10 @@ rm(list = ls())       # para limpiar el entorno de trabajo
 
 load("input/data/Latinobarometro_2023_Esp_Rdata_v1_0.rdata")
 
+## Carga datos base limpia --------------------------------------------
+
+latbar2023 <- readRDS("output/latbar2023.RDS")
+
 ## Filtrar y recodificaciones --------------------------------------------------
 
 latbar2023 <- Latinobarometro_2023_Esp_v1_0 %>%
@@ -76,6 +80,7 @@ screenreg(results_0) # de library texreg
 
 # Resultado -> 0.04972286 correlación intra clase de 5%
 
-# Guardar base de datos limpia en el output
+# Guardar datos ----------------------------------------------------------------
 
-# se me olvido qué codigo se usaba para eso
+save(data,file="output/data.RData")
+saveRDS(latbar2023, file = "output/latbar2023.RDS")
