@@ -87,14 +87,21 @@ reghelper::ICC(resultados_0)
 
 # Clase social en relación a tendencia política
 
-resultados_2 = lmer(tend_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
+resultados_1 = lmer(tend_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
 screenreg(resultados_2, naive=TRUE)
-
-screenreg(resultados_2)
 
 0.32/(0.31+9.34)
 
-# Resultado -> 0.03316062
+
+#------
+#Modelo 1 con todas las variables tipo 1:
+
+#propuesta
+resultados_2 = lmer(tend_politica ~ 1 + clase_scl + perc_economia + 
+                      perc_desigualdad + perc_libertad + perc_migracion + (1 | pais), data = latbar2023_final)
+screenreg(resultados_2)
+
+
 
 # Modelos de nivel 2
 
@@ -120,6 +127,24 @@ screenreg(resultados_4)
 screenreg(resultados_4)
 
 0.21/(0.21+9.03) = 0.02272727
+
+
+#----------
+#Modelo 2 con todas las variables tipo 2
+
+#propuesta
+resultados_5 = lmer(tend_politica ~ 1 + pais + garantias_pais + (1 | pais), data = latbar2023_final)
+screenreg(resultados_5)
+
+
+
+#Modelo 3 (individual con grupal)
+
+resultados_6 = lmer(tend_politica ~ 1 + clase_scl + perc_economia + 
+                   perc_desigualdad + perc_libertad + perc_migracion + 
+                   pais + garantias_pais + (1 | pais), data = latbar2023_final)
+screenreg(resultados_6)
+
 
 ## Comparación individual, agregado y multinivel--------------------------------
 
