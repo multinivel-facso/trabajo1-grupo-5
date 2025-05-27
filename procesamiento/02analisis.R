@@ -141,8 +141,7 @@ screenreg(resultados_5)
 #Modelo 3 (individual con grupal)
 
 resultados_6 = lmer(tend_politica ~ 1 + clase_scl + perc_economia + 
-                   perc_desigualdad + perc_libertad + perc_migracion + 
-                   pais + garantias_pais + (1 | pais), data = latbar2023_final)
+                   perc_desigualdad + perc_libertad + perc_migracion + garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_6)
 
 
@@ -178,3 +177,12 @@ htmlreg(list(reg_ind, reg_agg, resultados_3),
         caption="Primera comparación de modelos Individual, Agregado y Multinivel",
         caption.above=TRUE,
         doctype = FALSE)
+
+#Nuevooo
+#Comparación de regresiones
+
+reg_ind=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad + perc_migracion, data=latbar2023_final)
+reg_agg=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad + garantias_pais, data=agg_latbar2023_final)
+
+#Tres modelos juntos
+screenreg(list(reg_ind, reg_agg, resultados_6))
