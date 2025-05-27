@@ -29,19 +29,13 @@ agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS")
 
 ## Exploración y descripción--------------------------------------------------
 
-dim(latbar2023_final) # dimensiones de base de datos
-
 names(latbar2023_final) # Muestra los nombres de las variables en la base
-
-dim(latbar2023_final) # dimensiones
-
-head(latbar2023_final) # primeros 10 casos cada variable seleccionada
 
 summary(latbar2023_final) # Descriptivos generales (evaluación de datos perdidos)
 
 # Tabla descriptiva con stargazer
 
-stargazer(latbar2023_final, title = "Descriptivos generales", type='html')
+stargazer(latbar2023_final, title = "Descriptivos generales", type='text')
 
 stargazer(agg_latbar2023_final, type = "text")
 
@@ -79,7 +73,7 @@ summary(resultados_0)
 
 screenreg(resultados_0) # de library texreg
 
-reghelper::ICC(resulresultados_0)
+reghelper::ICC(resultados_0)
 
 # Los componentes del cálculo son: 
 
@@ -91,15 +85,6 @@ reghelper::ICC(resulresultados_0)
 
 # Modelos de nivel 1
 
-# Edad en relación a tendencia política
-
-resultados_1 = lmer(tend_politica ~ 1 + edad + (1 | pais), data = latbar2023_final)
-screenreg(resultados_1, naive=TRUE)
-
-screenreg(resultados_1)
-
-0.31/(0.31+9.30) = 0.03225806
-
 # Clase social en relación a tendencia política
 
 resultados_2 = lmer(tend_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
@@ -107,7 +92,9 @@ screenreg(resultados_2, naive=TRUE)
 
 screenreg(resultados_2)
 
-0.32/(0.31+9.34) = 0.03316062
+0.32/(0.31+9.34)
+
+# Resultado -> 0.03316062
 
 # Modelos de nivel 2
 
@@ -136,7 +123,7 @@ screenreg(resultados_4)
 
 ## Comparación individual, agregado y multinivel--------------------------------
 
-# Regersión comparación
+# Regresión comparación
 
 reg_ind=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad, data=latbar2023_final)
 
