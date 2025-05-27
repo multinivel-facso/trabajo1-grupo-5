@@ -37,24 +37,15 @@ rm(list = ls())       # para limpiar el entorno de trabajo
 
 ## Carga de datos ------------------------------------------
 
-# Carga datos *SÓLO 1ERA VEZ* (para subir la base original al github)
+# Carga datos *SÓLO 1ERA VEZ* (para poder crear las otras, no tocar después
+# de crear la base reducida)
 
 load("input/data/Latinobarometro_2023_Esp_Rdata_v1_0.rdata")
 
-# Carga datos base limpia, con el índice y las variables que lo componen 
+# Carga datos base limpia, con el índice y las variables que lo componen
+# no tocar después de hacer las recodificaciones
 
 latbar2023 <- readRDS("output/latbar2023.RDS")
-
-# Carga datos base limpia, sólo con el índice, no con las variables
-# que lo componen****
-
-latbar2023_final <- readRDS("output/latbar2023_final.RDS")
-
-# Carga datos base anterior agregada****
-
-agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS")
-
-# **** significa que se abren estas para los análisis
 
 ## Selección variables de interés ----------------------------------
 

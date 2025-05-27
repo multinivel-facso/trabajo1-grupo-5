@@ -1,3 +1,31 @@
+# ******************************************************************************
+# 
+#                         Universidad de Chile
+#                     Facultad de Ciencias Sociales
+#                       Análisis multinivel 2025
+#
+#                Cahuil Ortiz, Juan Prado y Angela Valeria
+#                     Profesor: Juan Carlos Castillo
+#                    Apoyo docente: Kevin Carrasco
+#                  Fecha de entrega: 28 de mayo de 2025
+#
+#                        Plantilla análisis
+#
+# ******************************************************************************
+
+
+## Carga Librerías --------------------------------------------------------------
+
+
+## Carga de datos ------------------------------------------
+
+# Base limpia, sólo con el índice, no con las variables que lo componen
+
+latbar2023_final <- readRDS("output/latbar2023_final.RDS")
+
+# Carga datos base anterior agregada
+
+agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS")
 
 ## Exploración y descripción--------------------------------------------------
 
@@ -15,7 +43,7 @@ summary(latbar2023_final) # Descriptivos generales (evaluación de datos perdido
 
 stargazer(latbar2023_final, title = "Descriptivos generales", type='html')
 
-stargazer(latbar2023_final_agg, type = "text")
+stargazer(agg_latbar2023_final, type = "text")
 
 # Revisión estadísticos descriptivos cada variable
 
