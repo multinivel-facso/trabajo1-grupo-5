@@ -6,9 +6,6 @@ date: "2025-05-28"
 lang: es
 format: html
 editor: visual
-execute:
-  echo: false
-  
 ---
 
 # Planteamiento del problema
@@ -30,15 +27,10 @@ pacman::p_load(tidyverse,   # manipulacion datos
                rempsyc,     # reporte
                broom,       # varios
                sjmisc,      # para descriptivos 
-               knitr,
-               psych,
-               kableExtra)            
+               knitr)            
 
 options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls()) # para limpiar el entorno de trabajo
-
-latbar2023_final <- readRDS("output/latbar2023_final.RDS")
-
 ```
 
 Esto lo podemos repetir para la carga de la base de datos y el procesamiento de los datos.
@@ -69,8 +61,38 @@ Y las variables del módulo de Salud y Bienestar, referentes a *Estado de ánimo
 -   Frecuencia: Enlentecimiento físico
 -   Frecuencia: Pensamiento de muerte o dañarse
 
-```{r tablas}
-psych::describe(latbar2023_final) %>%
-  kable() %>%
-  kable_styling(full_width = TRUE)
+```{r, echo=FALSE}
+include_graphics("https://www.desarrollosocialyfamilia.gob.cl/storage/image/banner-saludmental.png")
 ```
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+tab1 <- data %>%
+  group_by(as.factor(sexo)) %>% # agrupamos por sexo
+  summarise(n = n()) %>% # contamos por categ de respuesta
+  mutate(prop = round((n / sum(n)) * 100, 2)) # porcentaje
+ 
+pm <- as.numeric(tab1[2,3])
+ph <- as.numeric(tab1[1,3])
+
+tabla1 <- tab1 %>% 
+  kableExtra::kable(format = "html",
+                    align = "c",
+                    col.names = c("Sexo", "n", "Proporción"),
+                    caption = "Tabla 1. Distribución de sexo") %>% 
+  kableExtra::kable_classic(full_width = FALSE, position = "center", font_size = 14) %>% 
+  kableExtra::add_footnote(label = "Fuente: Elaboración propia en base a ELSOC 2016.")
+```
+
+En la @tbl-sexo podemos ver que la proporción de mujeres que responde la encuesta corresponde a `r pm`%, mientras que la propoción de hombres corresponde a `r ph`%.
+
+```{r tbl-sexo, echo=FALSE, warning=FALSE, message=FALSE}
+#| label: tbl-sexo
+#| tbl-cap: "Distribución de sexo"
+#| tbl-cap-location: top
+#| warning: false
+tabla1
+```
+
+# Bibliografía
+
+-   hola
