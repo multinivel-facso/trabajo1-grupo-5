@@ -50,7 +50,7 @@ latbar2023 <- readRDS("output/latbar2023.RDS")
 ## Selección variables de interés ----------------------------------
 
 latbar2023 <- Latinobarometro_2023_Esp_v1_0 %>%
-  select(S2, P16ST,P11STGBS.B, P61ST, P32INN, 
+  select(S2, P16ST, P61ST, P32INN, 
          idenpa, P41ST.A, P41ST.B, P41ST.C,
          P41ST.D, P41ST.E, P41ST.F, P41ST.G, 
          P41ST.H, P41ST.I, P41ST.J, P41ST.K,
@@ -107,10 +107,7 @@ latbar2023 <- mutate(latbar2023, garantias_pais = (P41ST.A + P41ST.B + P41ST.C +
 latbar2023 <- mutate(latbar2023, S2 = car::recode(latbar2023$S2, "1=4; 2=3; 3=2;
                                                                   4=1; 5=0"))
 
-latbar2023 <- mutate(latbar2023, P11STGBS.B = car::recode(latbar2023$P11STGBS.B,
-                                                          "1=3; 2=2; 3=1; 4=0"))
-
-latbar2023 <- mutate(latbar2023, P61ST = car::recode(latbar2023_final$P61ST,
+latbar2023 <- mutate(latbar2023, P61ST = car::recode(latbar2023$P61ST,
                            "1=0; 2=1; 3=2; 4=3; 5=4; 6=5; 7=6; 8=7; 9=8; 10=9"))
 
 latbar2023 <- mutate(latbar2023, P32INN = car::recode(latbar2023$P32INN,
@@ -119,10 +116,9 @@ latbar2023 <- mutate(latbar2023, P32INN = car::recode(latbar2023$P32INN,
 # Creación base con el índice, excluyendo las variables que lo componen
 
 latbar2023_final <- latbar2023 %>% select(clase_scl = S2, 
-                                          tend_politica = P16ST,
-                                          perc_economia = P11STGBS.B, 
+                                          orientacion_politica = P16ST,
                                           perc_desigualdad = P61ST, 
-                                          perc_libertad = P41ST.A, 
+                                          perc_liber_pol = P41ST.A, 
                                           perc_migracion = P32INN,
                                           pais = idenpa, 
                                           garantias_pais = garantias_pais)
