@@ -16,6 +16,26 @@
 
 ## Carga Librerías --------------------------------------------------------------
 
+library(pacman)
+pacman::p_load(tidyverse, # para sintaxis
+               ggplot2,  
+               rempsyc, # Reporte
+               kableExtra, # Tablas
+               broom,
+               Publish,
+               dplyr,
+               car,
+               lme4,
+               summarytools,
+               corrplot,
+               stargazer,
+               reghelper,
+               texreg,
+               foreign,
+               lattice,
+               sjPlot,
+               ggeffects)
+
 
 ## Carga de datos ------------------------------------------
 
@@ -69,6 +89,31 @@ freq(latbar2023_final$perc_liber_pol)
 
 descr(latbar2023_final$garantias_pais, stats = 
         c("min", "med", "max", "mean", "sd"), transpose = T)
+
+## Efectos aleatorios-----------------------------------------------------------
+
+# Coeficientes aleatorios
+
+reg_latbar2023_final0=lmer(orientacion_politica ~ 1 + ( 1 | pais), data = latbar2023_final)
+reg_latbar2023_final1=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 | pais), data = latbar2023_final)
+
+reg_latbar2023_final2=lmer(orientacion_politica ~ 1 + clase_scl + (1 +clase_scl | pais), data=latbar2023_final)
+htmlreg(list(reg_latbar2023_final1, reg_latbar2023_final2), doctype = FALSE) # para ver en la consola utilizar screenreg()
+
+screenreg(list(reg_latbar2023_final1, reg_latbar2023_final2))
+
+# Emprirical Bayes
+
+# Paiís de ejemplo: Argentina
+
+attach(latbar2023_final)
+latbar2023_final %>% group_by(pais) %>% summarise(mean(orientacion_politica),count=n()) %>% slice(1:17)
+
+latbar2023_final %>% group_by(pais) %>% summarise(mean(orientacion_politica),count=n()) %>% filter(pais==Argentina)
+
+Argentina<- latbar2023_final[ which(latbar2023_final$pais==Argentina), ] # subset datos para Argentina
+Argentina
+dim(Argentina)
 
 ## Estimación correlación intraclase (ICC)-------------------------------------
 

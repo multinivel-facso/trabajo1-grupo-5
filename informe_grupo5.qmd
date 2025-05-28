@@ -99,3 +99,5 @@ latbar2023_final %>%
 #  kableExtra::kable_classic(full_width = FALSE, position = "center", font_size = 14) %>% 
 #  kableExtra::add_footnote(label = "Fuente: Elaboración propia en base a ELSOC 2016.")
 ```
+
+## Descripción efectos aleatorios
