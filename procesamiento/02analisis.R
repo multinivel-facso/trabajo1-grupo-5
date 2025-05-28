@@ -43,66 +43,68 @@ stargazer(agg_latbar2023_final, type = "text")
 
 freq(latbar2023_final$clase_scl)
 
-descr(latbar2023_final$tend_politica, stats = 
-        c("min", "q1", "med", "q3", "max", "mean", "sd"), transpose = T)
-freq(latbar2023_final$tend_politica)
 
-descr(latbar2023_final$perc_economia, stats = 
-        c("min", "med", "max", "mean", "sd"), transpose = T)
-freq(latbar2023_final$perc_economia)
+descr(latbar2023_final$orientacion_politica, stats = 
+        c("min", "q1", "med", "q3", "max", "mean", "sd"), transpose = T)
+freq(latbar2023_final$orientacion_politica)
+
 
 descr(latbar2023_final$perc_desigualdad, stats = 
         c("min", "med", "max", "mean", "sd"), transpose = T)
 freq(latbar2023_final$perc_desigualdad)
 
+
 freq(latbar2023_final$pais)
 
-descr(latbar2023_final$perc_libertad, stats = 
+
+freq(latbar2023_final$perc_migracion)
+
+
+descr(latbar2023_final$perc_liber_pol, stats = 
         c("min", "med", "max", "mean", "sd"), transpose = T)
-freq(latbar2023_final$perc_libertad)
+freq(latbar2023_final$perc_liber_pol)
+
 
 descr(latbar2023_final$garantias_pais, stats = 
         c("min", "med", "max", "mean", "sd"), transpose = T)
 
-## Estimación correlación intraclase---------------------------------------
+## Estimación correlación intraclase (ICC)-------------------------------------
 
 # Null model
 
-resultados_0 = lmer(tend_politica ~ 1 + (1 | pais), data = latbar2023_final)
+resultados_0 = lmer(orientacion_politica ~ 1 + (1 | pais), data = latbar2023_final)
 summary(resultados_0)
 
 screenreg(resultados_0) # de library texreg
 
 reghelper::ICC(resultados_0)
-
-# Los componentes del cálculo son: 
-
-0.31/(0.31+8.88)
-
-# Resultado -> 0.03373232 correlación intra clase de 0.34%
+# Resultado ICC -> 0.03315684 (3.3%)
 
 ## Modelos multinivel-----------------------------------------------------------
 
 # Modelos de nivel 1
 
-# Clase social en relación a tendencia política
+#------
+# Modelo 1: Clase social en relación a orientación política
 
-resultados_1 = lmer(tend_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
-screenreg(resultados_2, naive=TRUE)
-
-0.32/(0.31+9.34)
-
+resultados_1 = lmer(orientacion_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
+screenreg(resultados_1, naive=TRUE)
 
 #------
-#Modelo 1 con todas las variables tipo 1:
+# Modelo 2 con todas las variables tipo 1:
 
-#propuesta
-resultados_2 = lmer(tend_politica ~ 1 + clase_scl + perc_economia + 
-                      perc_desigualdad + perc_libertad + perc_migracion + (1 | pais), data = latbar2023_final)
+resultados_2 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + 
+                      perc_liber_pol + perc_migracion + (1 | pais), data = latbar2023_final)
 screenreg(resultados_2)
 
+#------
+# Modelo 3: Libertad política individual con percepción desigualdad y relación 
+# con orientación política
 
+resultados_3 = lmer(orientacion_politica ~ 1 + perc_liber_pol + perc_desigualdad + (1 | pais), data = latbar2023_final)
+screenreg(resultados_3)
 
+#------------------------------
 # Modelos de nivel 2
 
 # Generar promedio clase social
@@ -110,48 +112,26 @@ screenreg(resultados_2)
 promedio_clase <- mean(latbar2023_final$clase_scl, na.rm = TRUE)
 latbar2023_final$promedio_clase <- promedio_clase
 
-# Clase social con percepción economía y relación con tendencia política
-
-resultados_3 = lmer(tend_politica ~ 1 + promedio_clase + perc_economia + (1 | pais), data = latbar2023_final)
-screenreg(resultados_3)
-
-screenreg(resultados_3)
-
-0.31/(0.31+9.30) = 0.03225806
-
-# Libertad individual con percepción desigualdad y relación con tendencia política
-
-resultados_4 = lmer(tend_politica ~ 1 + perc_libertad + perc_desigualdad + (1 | pais), data = latbar2023_final)
-screenreg(resultados_4)
-
-screenreg(resultados_4)
-
-0.21/(0.21+9.03) = 0.02272727
-
-
 #----------
-#Modelo 2 con todas las variables tipo 2
+# Modelo 4 con todas las variables tipo 2
 
-#propuesta
-resultados_5 = lmer(tend_politica ~ 1 + pais + garantias_pais + (1 | pais), data = latbar2023_final)
+resultados_4 = lmer(orientacion_politica ~ 1 + pais + garantias_pais + (1 | pais), data = latbar2023_final)
+screenreg(resultados_4)
+
+#------
+# Modelo 5 (individual con grupal)
+
+resultados_5 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + 
+                      perc_liber_pol + perc_migracion + garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_5)
-
-
-
-#Modelo 3 (individual con grupal)
-
-resultados_6 = lmer(tend_politica ~ 1 + clase_scl + perc_economia + 
-                   perc_desigualdad + perc_libertad + perc_migracion + garantias_pais + (1 | pais), data = latbar2023_final)
-screenreg(resultados_6)
-
 
 ## Comparación individual, agregado y multinivel--------------------------------
 
 # Regresión comparación
 
-reg_ind=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad, data=latbar2023_final)
+reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad, data=latbar2023_final)
 
-reg_agg=lm(tend_politica ~ edad + clase_scl + perc_economia + perc_libertad + perc_desigualdad, data=agg_latbar2023_final)
+reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad, data=agg_latbar2023_final)
 
 # Qué sucede cuando se comparan
 
@@ -163,7 +143,7 @@ screenreg(list(reg_ind, reg_agg, resultados_4))
 
 htmlreg(list(reg_ind, reg_agg, resultados_3), 
         custom.model.names = c("Individual","Agregado","Multinivel"),    
-        custom.coef.names = c("Log Likelihood", "$promedio_clase_{ij}$", "$perc_libertad_{ij}$", "$perc_desigualdad_{ij}$", "$edad_{ij}$", "$clase_scl_{ij}$"), 
+        custom.coef.names = c("Log Likelihood", "$promedio_clase_{ij}$", "$perc_liber_pol_{ij}$", "$perc_desigualdad_{ij}$", "$clase_scl_{ij}$"), 
         custom.gof.names=c("AIC",
                            "BIC",
                            "Log-verosimilitud",
@@ -181,8 +161,8 @@ htmlreg(list(reg_ind, reg_agg, resultados_3),
 #Nuevooo
 #Comparación de regresiones
 
-reg_ind=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad + perc_migracion, data=latbar2023_final)
-reg_agg=lm(tend_politica ~ clase_scl + perc_economia + perc_libertad + perc_desigualdad + garantias_pais, data=agg_latbar2023_final)
+reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + perc_migracion, data=latbar2023_final)
+reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + garantias_pais, data=agg_latbar2023_final)
 
 #Tres modelos juntos
 screenreg(list(reg_ind, reg_agg, resultados_6))
