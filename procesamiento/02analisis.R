@@ -29,9 +29,11 @@ agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS")
 
 ## Exploración y descripción--------------------------------------------------
 
-names(latbar2023_final) # Muestra los nombres de las variables en la base
+names(latbar2023_final)
 
-summary(latbar2023_final) # Descriptivos generales (evaluación de datos perdidos)
+summary(latbar2023_final)
+
+View(latbar2023_final)
 
 # Tabla descriptiva con stargazer
 
@@ -107,22 +109,25 @@ screenreg(resultados_3)
 #------------------------------
 # Modelos de nivel 2
 
-# Generar promedio clase social
+# Generar promedio garantías país
+# Ya guardé la base incluyendo esta variable, entonces no correr de nuevo
 
-promedio_clase <- mean(latbar2023_final$clase_scl, na.rm = TRUE)
-latbar2023_final$promedio_clase <- promedio_clase
+latbar2023_final <- latbar2023_final %>%
+  group_by(pais) %>%
+  mutate(prom_garantias_pais = mean(garantias_pais, na.rm = TRUE)) %>%
+  ungroup()
 
 #----------
 # Modelo 4 con todas las variables tipo 2
 
-resultados_4 = lmer(orientacion_politica ~ 1 + pais + garantias_pais + (1 | pais), data = latbar2023_final)
+resultados_4 = lmer(orientacion_politica ~ 1 + pais + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_4)
 
 #------
 # Modelo 5 (individual con grupal)
 
 resultados_5 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + 
-                      perc_liber_pol + perc_migracion + garantias_pais + (1 | pais), data = latbar2023_final)
+                    perc_liber_pol + perc_migracion + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_5)
 
 ## Comparación individual, agregado y multinivel--------------------------------
@@ -138,6 +143,14 @@ reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad,
 screenreg(list(reg_ind, reg_agg, resultados_3))
 
 screenreg(list(reg_ind, reg_agg, resultados_4))
+
+#Comparación de regresiones
+
+reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + perc_migracion, data=latbar2023_final)
+reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + garantias_pais, data=agg_latbar2023_final)
+
+#Tres modelos juntos
+screenreg(list(reg_ind, reg_agg, resultados_6))
 
 # Para HTML
 
@@ -157,12 +170,3 @@ htmlreg(list(reg_ind, reg_agg, resultados_3),
         caption="Primera comparación de modelos Individual, Agregado y Multinivel",
         caption.above=TRUE,
         doctype = FALSE)
-
-#Nuevooo
-#Comparación de regresiones
-
-reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + perc_migracion, data=latbar2023_final)
-reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + garantias_pais, data=agg_latbar2023_final)
-
-#Tres modelos juntos
-screenreg(list(reg_ind, reg_agg, resultados_6))
