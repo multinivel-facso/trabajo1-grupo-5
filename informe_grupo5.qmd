@@ -8,6 +8,7 @@ format: html
 editor: visual
 execute:
   echo: false
+  warning: false
 ---
 
 # Planteamiento del problema
@@ -16,7 +17,7 @@ Hola
 
 # Descripción de los datos
 
-```{r librerias, echo=FALSE, message=FALSE, warning=FALSE, collapse=TRUE}
+```{r librerias, include=FALSE}
 library(pacman)
 pacman::p_load(tidyverse, # para sintaxis
                ggplot2,  
@@ -52,19 +53,19 @@ agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS") # base agrupa
 
 Las variables que se utilizaron para el análisis son:
 
--   **Clase social** (*clase_scl*): clase social en la que pertenecen los encuestados. Valores: “Baja” (0), “Media Baja” (1), “Media” (2), “Media Alta” (3) y “Alta” (4).
+-   **Clase social** (*clase_scl*): clase social en la que pertenecen los encuestados. Valores: "Baja" (0), "Media Baja" (1), "Media" (2), "Media Alta" (3) y "Alta" (4).
 
--   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 “Izquierda” y 10 “Derecha” (media 5,36; desviación estándar \[DE\] 3,03; mediana 5).
+-   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 "Izquierda" y 10 "Derecha" (media 5,36; desviación estándar \[DE\] 3,03; mediana 5).
 
--   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 “Completamente inaceptable” y 9 “Completamente aceptable” (media 3,48; DE 2,86; mediana 4)
+-   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 "Completamente inaceptable" y 9 "Completamente aceptable" (media 3,48; DE 2,86; mediana 4)
 
 -   **Percepción de migración** (*perc_migracion*): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60,92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25,94% reportan que los beneficia.
 
 -   **País** (*pais*): país de procedencia de la persona. Es la variable de clúster en cuyas opciones de respuesta corresponden a 17 países de América Latina. Tiene un promedio de 851 personas por país (min 680 - max 1.002)
 
--   **(Promedio de) Garantías del país** (*garantias_pais* y *prom_garantias_pais*): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 “Para nada garantizadas” y 3 “Completamente garantizadas”. La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1,48; DE 0,6; mediana 1,46). Luego se calculó el promedio de esta variable por país, quedando la variable *prom_garantias_pais* (min 1,25; max 1,82; media 1,48; DE 0,13; mediana 1,45)
+-   **(Promedio de) Garantías del país** (*garantias_pais* y *prom_garantias_pais*): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 "Para nada garantizadas" y 3 "Completamente garantizadas". La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1,48; DE 0,6; mediana 1,46). Luego se calculó el promedio de esta variable por país, quedando la variable *prom_garantias_pais* (min 1,25; max 1,82; media 1,48; DE 0,13; mediana 1,45)
 
-**Percepción de libertad política** (*perc_liber_pol*): la percepción de las personas sobre la libertad que tienen de participar en política en su país. Esta variable primero se utilizó para construir *garantias_pais* y después se analizó independientemente.
+-   **Percepción de libertad política** (*perc_liber_pol*): la percepción de las personas sobre la libertad que tienen de participar en política en su país. Esta variable primero se utilizó para construir *garantias_pais* y después se analizó independientemente.
 
 ```{r tablas}
 
@@ -76,35 +77,79 @@ latbar2023_final %>%
 
 ```
 
-```{r, echo=FALSE}
-#include_graphics("https://www.desarrollosocialyfamilia.gob.cl/storage/image/banner-saludmental.png")
-```
-
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
-#tab1 <- data %>%
-#  group_by(as.factor(sexo)) %>% # agrupamos por sexo
-#  summarise(n = n()) %>% # contamos por categ de respuesta
-#  mutate(prop = round((n / sum(n)) * 100, 2)) # porcentaje
- 
-#pm <- as.numeric(tab1[2,3])
-#ph <- as.numeric(tab1[1,3])
-
-#tabla1 <- tab1 %>% 
-#  kableExtra::kable(format = "html",
-#                    align = "c",
-#                    col.names = c("Sexo", "n", "Proporción"),
-#                    caption = "Tabla 1. Distribución de sexo") %>% 
-#  kableExtra::kable_classic(full_width = FALSE, position = "center", font_size = 14) %>% 
-#  kableExtra::add_footnote(label = "Fuente: Elaboración propia en base a ELSOC 2016.")
-```
-
 ## Algún título para ICC y efectos aleatorios
 
 aaaa
 
+```{r icc}
+
+resultados_0 = lmer(orientacion_politica ~ 1 + (1 | pais), data = latbar2023_final)
+
+icc_val <- reghelper::ICC(resultados_0)
+cat("Correlación Intra-clase:", icc_val, "\n")
+
+icc_val <- round(reghelper::ICC(resultados_0)*100, 2)
+cat("Coeficiente de correlación intra-clase redondeado:", icc_val, "\n")
+
+```
+
 # Modelos preliminares
 
-aaaa
+#Modelo nulo
+
+```{r modelo_nulo}
+
+screenreg(resultados_0)
+
+```
+
+#Modelo 1 (Individual)
+
+```{r Modelo1}
+resultados_2 = lmer(orientacion_politica ~ 1 + clase_scl + perc_liber_pol + perc_desigualdad + (1 | pais), data = latbar2023_final)
+screenreg(resultados_2, naive=TRUE)
+```
+
+#Modelo 2 (grupales)
+
+```{r}
+resultados_4 = lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2023_final)
+screenreg(resultados_4)
+```
+
+Modelo 3 (individuales con grupales)
+
+```{r}
+resultados_5 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + perc_liber_pol + prom_garantias_pais + (1 | pais), data = latbar2023_final)
+screenreg(resultados_5)
+```
+
+#Comparación de los tres modelos
+
+```{r}
+#Comparación de regresiones
+
+reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad, data=latbar2023_final)
+
+reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad + prom_garantias_pais, data=agg_latbar2023_final)
+
+#Tres modelos juntos
+screenreg(list(reg_ind, reg_agg, resultados_5))
+```
+
+#Efectos aleatorios
+
+```{r}
+reg_latbar2023_final0=lmer(orientacion_politica ~ 1 + ( 1 | pais), data = latbar2023_final)
+
+reg_latbar2023_final1=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 | pais), data = latbar2023_final)
+
+reg_latbar2023_final2=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 +clase_scl | pais), data=latbar2023_final)
+
+screenreg(list(reg_latbar2023_final0, reg_latbar2023_final1, reg_latbar2023_final2))
+```
+
+aaaaa
 
 # Bibliografía
 
