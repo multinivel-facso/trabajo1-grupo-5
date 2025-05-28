@@ -30,7 +30,11 @@ pacman::p_load(tidyverse, # para sintaxis
                corrplot,
                stargazer,
                reghelper,
-               texreg)
+               texreg,
+               foreign,
+               lattice,
+               sjPlot,
+               ggeffects)
 
 options(scipen = 999) # para desactivar notación científica
 rm(list = ls())       # para limpiar el entorno de trabajo

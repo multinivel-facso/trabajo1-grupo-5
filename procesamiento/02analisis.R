@@ -90,6 +90,10 @@ freq(latbar2023_final$perc_liber_pol)
 descr(latbar2023_final$garantias_pais, stats = 
         c("min", "med", "max", "mean", "sd"), transpose = T)
 
+
+descr(latbar2023_final$prom_garantias_pais, stats = 
+        c("min", "med", "max", "mean", "sd"), transpose = T)
+
 ## Efectos aleatorios-----------------------------------------------------------
 
 # Coeficientes aleatorios

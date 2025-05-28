@@ -16,57 +16,55 @@ Hola
 
 # Descripción de los datos
 
-Hola
-
-Podemos cargar las librerías sin que aparezca en nuestro informe, señalando la especificación al chunk `echo=FALSE`.
-
 ```{r librerias, echo=FALSE, message=FALSE, warning=FALSE, collapse=TRUE}
 library(pacman)
-pacman::p_load(tidyverse,   # manipulacion datos
-               sjPlot,      # tablas
-               confintr,    # IC
-               gginference, # visualizacion 
-               rempsyc,     # reporte
-               broom,       # varios
-               sjmisc,      # para descriptivos 
-               knitr,
-               psych,
-               kableExtra)            
+pacman::p_load(tidyverse, # para sintaxis
+               ggplot2,  
+               rempsyc, # Reporte
+               kableExtra, # Tablas
+               broom,
+               Publish,
+               dplyr,
+               car,
+               lme4,
+               summarytools,
+               corrplot,
+               stargazer,
+               reghelper,
+               texreg,
+               foreign,
+               lattice,
+               sjPlot,
+               ggeffects)            
 
 options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls()) # para limpiar el entorno de trabajo
-
-latbar2023_final <- readRDS("output/latbar2023_final.RDS")
-
 ```
 
-Esto lo podemos repetir para la carga de la base de datos y el procesamiento de los datos.
+La base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19.205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14.469 observaciones (nivel 1). Se creó la variable *garantias_pais*, un índice compuesto por la suma de 13 variables (*P41ST.A* a *P41ST.M*), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de *garantias_pais* por país (*prom_garantias_pais*), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable pais, quedando con un N=17 en el nivel 2.
 
 ```{r datos, echo=FALSE, warning=FALSE, message=FALSE}
-load(file="output/data.RData")
+latbar2023_final <- readRDS("output/latbar2023_final.RDS")
+agg_latbar2023_final <- readRDS("output/agg_latbar2023_final.RDS") # base agrupada
 ```
-
-A continuación, en nuestro ejemplo describiremos las variables necesarias para responder a nuestro objetivo.
 
 ## Descripción de variables
 
-En este ejemplo, se seleccionaron las variables:
+Las variables que se utilizaron para el análisis son:
 
--   sexo: sexo del encuestado, con nivel de medición nominal
--   edad: edad del encuestado, con nivel de medición intervalar
--   nedu: nivel educativo del encuestado, con nivel de medición ordinal
+-   **Clase social** (*clase_scl*): clase social en la que pertenecen los encuestados. Valores: “Baja” (0), “Media Baja” (1), “Media” (2), “Media Alta” (3) y “Alta” (4).
 
-Y las variables del módulo de Salud y Bienestar, referentes a *Estado de ánimo: sintomatología depresiva*, con nivel de medición ordinal, los ítems son los siguientes:
+-   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 “Izquierda” y 10 “Derecha” (media 5,36; desviación estándar \[DE\] 3,03; mediana 5).
 
--   Frecuencia: Poco interés o alegría
--   Frecuencia: Decaimiento, pesadez o desesperanza
--   Frecuencia: Dificultad para dormir o exceso de sueño
--   Frecuencia: Cansancio o sensación de falta de energía
--   Frecuencia: Apetito disminuido o aumentado
--   Frecuencia: Dificultad para concentrarse
--   Frecuencia: Mala opinión de sí mismo
--   Frecuencia: Enlentecimiento físico
--   Frecuencia: Pensamiento de muerte o dañarse
+-   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 “Completamente inaceptable” y 9 “Completamente aceptable” (media 3,48; DE 2,86; mediana 4)
+
+-   **Percepción de migración** (*perc_migracion*): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60,92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25,94% reportan que los beneficia.
+
+-   **País** (*pais*): país de procedencia de la persona. Es la variable de clúster en cuyas opciones de respuesta corresponden a 17 países de América Latina. Tiene un promedio de 851 personas por país (min 680 - max 1.002)
+
+-   **(Promedio de) Garantías del país** (*garantias_pais* y *prom_garantias_pais*): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 “Para nada garantizadas” y 3 “Completamente garantizadas”. La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1,48; DE 0,6; mediana 1,46). Luego se calculó el promedio de esta variable por país, quedando la variable *prom_garantias_pais* (min 1,25; max 1,82; media 1,48; DE 0,13; mediana 1,45)
+
+**Percepción de libertad política** (*perc_liber_pol*): la percepción de las personas sobre la libertad que tienen de participar en política en su país. Esta variable primero se utilizó para construir *garantias_pais* y después se analizó independientemente.
 
 ```{r tablas}
 
@@ -100,4 +98,14 @@ latbar2023_final %>%
 #  kableExtra::add_footnote(label = "Fuente: Elaboración propia en base a ELSOC 2016.")
 ```
 
-## Descripción efectos aleatorios
+## Algún título para ICC y efectos aleatorios
+
+aaaa
+
+# Modelos preliminares
+
+aaaa
+
+# Bibliografía
+
+aa
