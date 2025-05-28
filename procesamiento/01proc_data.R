@@ -143,5 +143,3 @@ save(data,file="output/data.RData")
 saveRDS(latbar2023, file = "output/latbar2023.RDS")
 saveRDS(latbar2023_final, file = "output/latbar2023_final.RDS")
 saveRDS(agg_latbar2023_final, file = "output/agg_latbar2023_final.RDS")
-
-
