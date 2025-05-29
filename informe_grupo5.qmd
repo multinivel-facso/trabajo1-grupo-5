@@ -44,7 +44,7 @@ options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls()) # para limpiar el entorno de trabajo
 ```
 
-La base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19.205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14.469 observaciones (nivel 1). Se creó la variable *garantias_pais*, un índice compuesto por la suma de 13 variables (*P41ST.A* a *P41ST.M*), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de *garantias_pais* por país (*prom_garantias_pais*), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable pais, quedando con un N=17 en el nivel 2.
+La base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14469 observaciones (nivel 1). Se creó la variable *garantias_pais*, un índice compuesto por la suma de 13 variables (*P41ST.A* a *P41ST.M*), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de *garantias_pais* por país (*prom_garantias_pais*), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable pais, quedando con un N=17 en el nivel 2.
 
 ```{r datos, echo=FALSE, warning=FALSE, message=FALSE}
 latbar2023_final <- readRDS("output/latbar2023_final.RDS")
@@ -57,15 +57,15 @@ Las variables que se utilizaron para el análisis son:
 
 -   **Clase social** (*clase_scl*): clase social en la que pertenecen los encuestados. Valores: "Baja" (0), "Media Baja" (1), "Media" (2), "Media Alta" (3) y "Alta" (4).
 
--   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 "Izquierda" y 10 "Derecha" (media 5,36; desviación estándar \[DE\] 3,03; mediana 5).
+-   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 "Izquierda" y 10 "Derecha" (media 5.36; desviación estándar \[DE\] 3.03; mediana 5).
 
--   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 "Completamente inaceptable" y 9 "Completamente aceptable" (media 3,48; DE 2,86; mediana 4)
+-   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 "Completamente inaceptable" y 9 "Completamente aceptable" (media 3.48; DE 2,86; mediana 4)
 
--   **Percepción de migración** (*perc_migracion*): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60,92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25,94% reportan que los beneficia.
+-   **Percepción de migración** (*perc_migracion*): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60.92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25.94% reportan que los beneficia.
 
--   **País** (*pais*): país de procedencia de la persona. Es la variable de clúster en cuyas opciones de respuesta corresponden a 17 países de América Latina. Tiene un promedio de 851 personas por país (min 680 - max 1.002)
+-   **País** (*pais*): país de procedencia de la persona. Es la variable de clúster en cuyas opciones de respuesta corresponden a 17 países de América Latina. Tiene un promedio de 851 personas por país (min 680 - max 1002)
 
--   **(Promedio de) Garantías del país** (*garantias_pais* y *prom_garantias_pais*): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 "Para nada garantizadas" y 3 "Completamente garantizadas". La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1,48; DE 0,6; mediana 1,46). Luego se calculó el promedio de esta variable por país, quedando la variable *prom_garantias_pais* (min 1,25; max 1,82; media 1,48; DE 0,13; mediana 1,45)
+-   **(Promedio de) Garantías del país** (*garantias_pais* y *prom_garantias_pais*): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 "Para nada garantizadas" y 3 "Completamente garantizadas". La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1.48; DE 0.6; mediana 1.46). Luego se calculó el promedio de esta variable por país, quedando la variable *prom_garantias_pais* (min 1.25; max 1.82; media 1.48; DE 0.13; mediana 1.45)
 
 -   **Percepción de libertad política** (*perc_liber_pol*): la percepción de las personas sobre la libertad que tienen de participar en política en su país. Esta variable primero se utilizó para construir *garantias_pais* y después se analizó independientemente.
 
