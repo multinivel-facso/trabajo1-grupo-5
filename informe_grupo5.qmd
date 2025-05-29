@@ -13,13 +13,27 @@ execute:
 
 # Planteamiento del problema
 
-El continente latinoamericano ha experimentado cambios políticos considerables en los últimos años. Dentro del periodo 2021 al 2024 ocurre el \"superciclo electoral\" latinoamericano, donde 17 países han celebrado elecciones presidenciales y parlamentarias renovando el escenario gubernamental de la región (Zovatto, 2022). Esta renovación se enmarca dentro del agitado clima político de los años anteriores: las manifestaciones contra la violencia en Ecuador, contra el poco transparente  proceso electoral tanto en Bolivia como en Perú, el \"estallido social\" en Chile, entre otros, son antecedentes importantes para entender un posible giro en el escenario político del continente. 
+El continente latinoamericano ha experimentado cambios políticos considerables en los últimos años. Dentro del periodo 2021 al 2024 ocurre el "superciclo electoral" latinoamericano, donde 17 países han celebrado elecciones presidenciales y parlamentarias renovando el escenario gubernamental de la región (Zovatto, 2022). Esta renovación se enmarca dentro del agitado clima político de los años anteriores: las manifestaciones contra la violencia en Ecuador, contra el poco transparente  proceso electoral tanto en Bolivia como en Perú, el "estallido social" en Chile, entre otros, son antecedentes importantes para entender un posible giro en el escenario político del continente. 
 
 En este contexto surge la necesidad de un análisis respecto a la orientación política que considere al continente entero y posibles transformaciones políticas en conjunto. Siendo fundamental tener en cuenta las garantías que ofrece a sus ciudadanos, pues fueron las principales consignas de las movilizaciones en el periodo 2019 a 2022 (Zovatto, 2022). Asimismo, se considera importante otros factores que se ha visto que podrían afectar a la orientación política significativamente, como la percepción de desigualdad (Castillo et al., 2012), clase social (Haye et al., 2008), actitudes racistas (Gómez y Huici, 1999), entre otros. Además, estas temáticas cobran mayor relevancia al estar presentes en discursos políticos de derecha radical actuales, movimientos cada vez mayores en la región (Ubilluz, 2024). 
 
 El objetivo de este estudio es explorar las relaciones entre la orientación política y clase social, percepciones de desigualdad, migración, garantías del país, entre otras, teniendo en cuenta la diferencia del país de residencia y las garantías que ofrece este. Este análisis utiliza una metodología multinivel utilizando la base de datos de Latinobarómetro del 2023 (Corporación Latinobarómetro, 2023). Se analizará en un primer nivel las percepciones de la situación país (migración, desigualdad y libertad política) y clase social; y en un segundo nivel el país de residencia y las garantías que presente este a sus ciudadanos.
 
 # Preguntas de lógica multinivel
+
+Para efectos de este trabajo investigativo se plantean cuatro hipótesis que se presentan como preguntas de investigación, dos son de primer nivel y dos son de segundo nivel.
+
+### Preguntas de primer nivel:
+
+¿Existe una relación significativa entre la clase social y la orientación política de personas residentes en los países latinoamericanos?
+
+¿Existe una relación significativa entre el nivel de percepción de desigualdad y la orientación política de personas residentes en los países latinoamericanos?
+
+### Preguntas de segundo nivel:
+
+¿En qué medida la relación entre la clase social y la orientación política se ve afectada por el país de residencia en países latinoamericanos?
+
+¿Las garantías de derechos, oportunidades, libertades y seguridades entregadas por el país tienen un efecto en la orientación política de sus habitantes?
 
 # Descripción de los datos
 
@@ -157,7 +171,7 @@ tabla_final <- full_join(modelo1_df, modelo2_df, by = "Componente")
 kable(tabla_final, caption = "Coeficiente aleatorio con clase social", digits = 2)
 ```
 
-En el contexto del \"superciclo electoral\" latinoamericano y los recientes cambios políticos en la región, este análisis multinivel examina cómo la clase social se relaciona con la orientación política, considerando las diferencias entre países.
+En el contexto del "superciclo electoral" latinoamericano y los recientes cambios políticos en la región, este análisis multinivel examina cómo la clase social se relaciona con la orientación política, considerando las diferencias entre países.
 
 El modelo con pendiente aleatoria muestra que la orientación política promedio varía entre países (varianza del intercepto = **0.35**), lo que refleja contextos ideológicos nacionales distintos. Además, la relación entre clase social y orientación política también varía entre países, aunque de forma leve (varianza de la pendiente = **0.01**), lo que sugiere que el efecto de clase no es igual en toda la región.
 
@@ -202,6 +216,18 @@ broom.mixed::tidy(resultados_2, effects = "fixed") %>%
   kable(digits = 3, caption = "Modelo 1: clase social, percepción libertad política y percepción desigualdad")
 ```
 
+```{r}
+
+resultados_1 = lmer(orientacion_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
+
+broom.mixed::tidy(resultados_1, effects = "fixed") %>%
+  arrange(desc(abs(estimate))) %>%
+  select(term, estimate, std.error, statistic) %>%
+  kable(digits = 3, caption = "Modelo 1: clase social, percepción libertad política y percepción desigualdad")
+
+```
+
+
 Este modelo de nivel individual analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política, influyen en la orientación política controlando por país con un intercepto aleatorio. El intercepto estimado es **4.388**, indicando una orientación promedio cercana al centro-izquierda alejándose un poco de lo visto en el Modelo nulo. Todos los predictores tienen efectos positivos y significativos, lo que sugiere que mayores niveles en estas variables se asocian con una orientación más hacia la derecha.
 
 Específicamente, una mayor percepción de desigualdad (**0.193**), mayor percepción de libertad política ( **0.100**) y una clase social más alta (**0.097**) predicen una orientación política más conservadora. Esto indica que las percepciones sobre el entorno y la posición social juegan un rol importante en la definición ideológica.
@@ -229,7 +255,7 @@ El intercepto estimado es **3.481**, mientras que el coeficiente de promedio de 
 
 La desviación estándar del intercepto por país **(0.541)** indica diferencias moderadas entre países en la orientación política promedio, mientras que la variación individual dentro de los países sigue siendo alta **(2.981)**.
 
-En el contexto del \"superciclo electoral\" latinoamericano, este modelo ofrece una primera aproximación al rol del contexto nacional. Aunque el efecto de las garantías percibidas no es concluyente, apunta a que las condiciones institucionales podrían influir en la orientación política, y refuerza la necesidad de integrar variables contextuales e individuales para entender mejor las actitudes políticas en la región.
+En el contexto del "superciclo electoral" latinoamericano, este modelo ofrece una primera aproximación al rol del contexto nacional. Aunque el efecto de las garantías percibidas no es concluyente, apunta a que las condiciones institucionales podrían influir en la orientación política, y refuerza la necesidad de integrar variables contextuales e individuales para entender mejor las actitudes políticas en la región.
 
 ### Modelo 3 (individuales con grupales)
 
