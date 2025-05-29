@@ -217,16 +217,14 @@ broom.mixed::tidy(resultados_2, effects = "fixed") %>%
 ```
 
 ```{r}
-
 resultados_1 = lmer(orientacion_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
 
 broom.mixed::tidy(resultados_1, effects = "fixed") %>%
   arrange(desc(abs(estimate))) %>%
   select(term, estimate, std.error, statistic) %>%
-  kable(digits = 3, caption = "Modelo 1: clase social, percepción libertad política y percepción desigualdad")
+  kable(digits = 3, caption = "Modelo: clase social y orientación política")
 
 ```
-
 
 Este modelo de nivel individual analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política, influyen en la orientación política controlando por país con un intercepto aleatorio. El intercepto estimado es **4.388**, indicando una orientación promedio cercana al centro-izquierda alejándose un poco de lo visto en el Modelo nulo. Todos los predictores tienen efectos positivos y significativos, lo que sugiere que mayores niveles en estas variables se asocian con una orientación más hacia la derecha.
 
