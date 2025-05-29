@@ -13,7 +13,7 @@ execute:
 
 # Planteamiento del problema
 
-El continente latinoamericano ha experimentado cambios políticos considerables en los últimos años. Dentro del periodo 2021 al 2024 ocurre el "superciclo electoral" latinoamericano, donde 17 países han celebrado elecciones presidenciales y parlamentarias renovando el escenario gubernamental de la región (Zovatto, 2022). Esta renovación se enmarca dentro del agitado clima político de los años anteriores: las manifestaciones contra la violencia en Ecuador, contra el poco transparente  proceso electoral tanto en Bolivia como en Perú, el "estallido social" en Chile, entre otros, son antecedentes importantes para entender un posible giro en el escenario político del continente. 
+El continente latinoamericano ha experimentado cambios políticos considerables en los últimos años. Dentro del periodo 2021 al 2024 ocurre el "superciclo electoral" latinoamericano, donde 17 países han celebrado elecciones presidenciales y parlamentarias renovando el escenario gubernamental de la región (Zovatto, 2022). Esta renovación se enmarca dentro del agitado clima político de los años anteriores: las manifestaciones contra la violencia en Ecuador, contra el poco transparente proceso electoral tanto en Bolivia como en Perú, el "estallido social" en Chile, entre otros, son antecedentes importantes para entender un posible giro en el escenario político del continente. 
 
 En este contexto surge la necesidad de un análisis respecto a la orientación política que considere al continente entero y posibles transformaciones políticas en conjunto. Siendo fundamental tener en cuenta las garantías que ofrece a sus ciudadanos, pues fueron las principales consignas de las movilizaciones en el periodo 2019 a 2022 (Zovatto, 2022). Asimismo, se considera importante otros factores que se ha visto que podrían afectar a la orientación política significativamente, como la percepción de desigualdad (Castillo et al., 2012), clase social (Haye et al., 2008), actitudes racistas (Gómez y Huici, 1999), entre otros. Además, estas temáticas cobran mayor relevancia al estar presentes en discursos políticos de derecha radical actuales, movimientos cada vez mayores en la región (Ubilluz, 2024). 
 
@@ -21,28 +21,26 @@ El objetivo de este estudio es explorar las relaciones entre la orientación pol
 
 # Preguntas de lógica multinivel
 
-Para efectos de este trabajo investigativo se plantean cuatro hipótesis que se presentan como preguntas de investigación, dos son de primer nivel y dos son de segundo nivel.
+Para efectos de este trabajo investigativo se plantean tres preguntas de investigación: dos de primer nivel y una de segundo nivel.
 
-### Preguntas de primer nivel:
+**Preguntas de primer nivel**:
 
-¿Existe una relación significativa entre la clase social y la orientación política de personas residentes en los países latinoamericanos?
+• ¿Existe una relación significativa entre la clase social y la orientación política de personas residentes en los países latinoamericanos?
 
-¿Existe una relación significativa entre el nivel de percepción de desigualdad y la orientación política de personas residentes en los países latinoamericanos?
+• ¿Existe una relación significativa entre el nivel de percepción de desigualdad y la orientación política de personas residentes en los países latinoamericanos?
 
-### Preguntas de segundo nivel:
+**Pregunta de segundo nivel:**
 
-¿En qué medida la relación entre la clase social y la orientación política se ve afectada por el país de residencia en países latinoamericanos?
-
-¿Las garantías de derechos, oportunidades, libertades y seguridades entregadas por el país tienen un efecto en la orientación política de sus habitantes?
+• ¿Las garantías de derechos, oportunidades, libertades y seguridades entregadas por el país tienen un efecto en la orientación política de sus habitantes?
 
 # Descripción de los datos
 
 ```{r librerias, include=FALSE}
 library(pacman)
-pacman::p_load(tidyverse, # para sintaxis
+pacman::p_load(tidyverse,
                ggplot2,  
-               rempsyc, # Reporte
-               kableExtra, # Tablas
+               rempsyc,
+               kableExtra,
                broom,
                Publish,
                dplyr,
@@ -60,11 +58,10 @@ pacman::p_load(tidyverse, # para sintaxis
                broom.mixed,
                modelsummary)            
 
-options(scipen = 999) # para desactivar notacion cientifica
-rm(list = ls()) # para limpiar el entorno de trabajo
+options(scipen = 999)
 ```
 
-La base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14469 observaciones (nivel 1). Se creó la variable *garantias_pais*, un índice compuesto por la suma de 13 variables (*P41ST.A* a *P41ST.M*), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de *garantias_pais* por país (*prom_garantias_pais*), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable pais, quedando con un N=17 en el nivel 2.
+Como se mencionó anteriormente, la base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14469 observaciones (nivel 1). Se creó la variable *garantias_pais*, un índice compuesto por la suma de 13 variables (*P41ST.A* a *P41ST.M*), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de *garantias_pais* por país (*prom_garantias_pais*), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable *pais*, quedando con un N=17 en el nivel 2.
 
 ```{r datos, echo=FALSE, warning=FALSE, message=FALSE}
 latbar2023_final <- readRDS("output/latbar2023_final.RDS")
@@ -79,7 +76,7 @@ Las variables que se utilizaron para el análisis son:
 
 -   **Orientación política** (*orientacion_politica*): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 "Izquierda" y 10 "Derecha" (media 5.36; desviación estándar \[DE\] 3.03; mediana 5).
 
--   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 "Completamente inaceptable" y 9 "Completamente aceptable" (media 3.48; DE 2,86; mediana 4)
+-   **Percepción de desigualdad** (*perc_desigualdad*): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 "Completamente inaceptable" y 9 "Completamente aceptable" (media 3.48; DE 2.86; mediana 4)
 
 -   **Percepción de migración** (*perc_migracion*): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60.92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25.94% reportan que los beneficia.
 
@@ -121,7 +118,7 @@ icc_df <- data.frame(
 knitr::kable(icc_df, caption = "Coeficiente de Correlación Intra-clase (ICC)", digits = 2)
 ```
 
-El coeficiente de correlación intra clase (ICC) del modelo es de **0.033**, lo que indica que solo el **3.3%** de la varianza en la orientación política se explica por diferencias entre países. El **96.7%** restante se debe a variación entre individuos dentro de los países.
+El coeficiente de correlación intra clase (ICC) del modelo es de **0.033**, lo que indica que sólo el **3.3%** de la varianza en la orientación política se explica por diferencias entre países. El **96.7%** restante se debe a variación entre individuos dentro de los países.
 
 Este bajo ICC sugiere que la orientación política varía mucho más entre personas de un mismo país que entre países diferentes. Aunque la varianza entre países es reducida, el uso de un modelo multinivel sigue siendo apropiado para reflejar la estructura jerárquica de los datos.
 
@@ -196,9 +193,9 @@ lmer(orientacion_politica ~ 1 + (1 | pais), data = latbar2023_final) |>
   kable(digits = 3, caption = "Modelo Nulo")
 ```
 
-Este modelo incluye solo un intercepto fijo y un intercepto aleatorio por país, lo que permite estimar la variación en la orientación política tanto entre países como entre individuos dentro de cada país.
+Este modelo incluye sólo un intercepto fijo y un intercepto aleatorio por país, lo que permite estimar la variación en la orientación política tanto entre países como entre individuos dentro de cada país.
 
-El intercepto fijo obtenido es de **5.369**, lo que representa el promedio general de orientación política en la muestra, en una escala donde 1 indica posiiconamiento a la izquierda y 10 a la derecha. Este valor sugiere que, en promedio los encuestados tienden a ubicarse levemente hacia el centro-derecha del espectro político.
+El intercepto fijo obtenido es de **5.369**, lo que representa el promedio general de orientación política en la muestra, en una escala donde 0 indica posicionamiento a la izquierda y 10 a la derecha. Este valor sugiere que, en promedio los encuestados tienden a ubicarse levemente hacia el centro-derecha del espectro político.
 
 En cuanto a los efectos aleatorios, la desviación estándar del intercepto por país es de **0.552**, lo que indica que existen diferencias moderadas entre países respecto a su orientación política promedio. Por otro lado, la desviación estándar a nivel individual es de **2.981**, lo que muestra una alta variabilidad en la orientación política entre personas dentro de cada país.
 
@@ -247,7 +244,7 @@ lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2
   kable(digits = 3, caption = "Modelo 2: garantías promedio")
 ```
 
-Este modelo de nivel grupal, incorpora el promedio de garantías ofrecidas por cada país como variable contextual para explicar la orientación política manteniendo un intercepto aleatorio por país. A diferencia de los modelos centrados en factores individuales, este busca identificar si las condiciones estructurales nacionales influyen en la ubicación ideológica de los ciudadanos.
+Este modelo de nivel grupal, incorpora el promedio de garantías ofrecidas por cada país como variable contextual para explicar la orientación política manteniendo un intercepto aleatorio por país. A diferencia de los modelos centrados en factores individuales, este busca identificar si las condiciones estructurales nacionales influyen en la ubicación ideológica de los residentes.
 
 El intercepto estimado es **3.481**, mientras que el coeficiente de promedio de garantías es **1.272**, lo que sugiere que en países donde se perciben más garantías, las personas tienden a ubicarse más hacia la derecha. Sin embargo, este efecto no es estadísticamente significativo ya que al calcular la prueba t esta da **1.28**, por lo tanto no se puede afirmar con certeza que exista una relación generalizable.
 
@@ -279,7 +276,7 @@ El intercepto estimado es **3.611**, lo que representa la orientación política
 
 A nivel individual, todos los predictores mantienen efectos positivos y significativos: la percepción de desigualdad **(0.193)**, la percepción de libertad política **(0.100)** y la clase social **(0.097)** están asociadas con una mayor orientación hacia la derecha. Estos hallazgos son consistentes con los modelos previos y apoyan la idea de que los factores individuales influyen significativamente en las posturas ideológicas de los ciudadanos.
 
-En cambio, el efecto del promedio de garantías percibidas por país es positivo (**0.524**), pero noestadísticamente significativo ya que al realizarle una prueba t, esta da 0.59, lo que sugiere que, una vez controladas las variables individuales, esta variable contextual no tiene un impacto claro o robusto sobre la orientación política.
+En cambio, el efecto del promedio de garantías percibidas por país es positivo (**0.524**), pero no estadísticamente significativo, ya que al realizarle una prueba t, ésta da 0.59, lo que sugiere que, una vez controladas las variables individuales, esta variable contextual no tiene un impacto claro o robusto sobre la orientación política.
 
 En conjunto, este modelo reafirma que las percepciones personales y la posición de clase tienen un peso importante en la configuración ideológica en América Latina, mientras que las condiciones estructurales nacionales, como las garantías percibidas, parecen tener un efecto más débil o indirecto. Estos resultados subrayan la necesidad de considerar tanto los factores individuales como los contextos nacionales para comprender el comportamiento político en un periodo de alta volatilidad y transformación en la región.
 
@@ -304,13 +301,13 @@ tab_model(reg_ind, reg_agg, resultados_5,
   title = "Comparación de Modelos: Individual, Agregado y Multinivel")
 ```
 
-En esta unión de modelos se compara: un modelo individual, uno agregado a nivel país y un modelo multinivel, este último integrando simultáneamente factores individuales y contextuales.
+En esta unión de modelos se compara un modelo individual, uno agregado a nivel país y un modelo multinivel, este último integrando simultáneamente factores individuales y contextuales.
 
-En el *modelo individual*, se analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política influyen en la orientación política, sin considerar las diferencias entre países. Todas las variables muestran efectos positivos y significativos: clase social (**0.08**), percepción de libertad política (**0.09**) y percepción de desigualdad (**0.21**). Esto indica que, a nivel individual estas variables se asocian con una mayor orientación hacia la derecha.
+En el modelo individual, se analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política influyen en la orientación política, sin considerar las diferencias entre países. Todas las variables muestran efectos positivos y significativos: clase social (**0.08**), percepción de libertad política (**0.09**) y percepción de desigualdad (**0.21**). Esto indica que, a nivel individual estas variables se asocian con una mayor orientación hacia la derecha.
 
-El *modelo agregado*, en cambio, utiliza promedios por país y pierde completamente la variabilidad individual. Aquí, ninguno de los predictores resulta estadísticamente significativo, con coeficientes inconsistentes e incluso opuestos en el caso de la clase social **(-1.11 p = 0.236)**. Esto evidencia que los promedios nacionales pueden ocultar dinámicas importantes que ocurren dentro de los países.
+El modelo agregado, en cambio, utiliza promedios por país y pierde completamente la variabilidad individual. Aquí, ninguno de los predictores resulta estadísticamente significativo, con coeficientes inconsistentes e incluso opuestos en el caso de la clase social **(-1.11 p = 0.236)**. Esto evidencia que los promedios nacionales pueden ocultar dinámicas importantes que ocurren dentro de los países.
 
-El *modelo multinivel*, que integra ambas dimensiones, ofrece una visión más precisa. Mantiene la significancia de todos los predictores individuales: clase social **(0.10)**, percepción de libertad política **(0.10)** y percepción de desigualdad **(0.19)**, todos con **p \< 0.001**. El efecto de promedio de garantías por país es positivo **(0.52)**, pero no significativo **(p = 0.555)**, indicando que, una vez controladas las percepciones individuales, las garantías percibidas a nivel nacional no explican de forma clara la orientación política.
+El modelo multinivel, que integra ambas dimensiones, ofrece una visión más precisa. Mantiene la significancia de todos los predictores individuales: clase social **(0.10)**, percepción de libertad política **(0.10)** y percepción de desigualdad **(0.19)**, todos con **p \< 0.001**. El efecto de promedio de garantías por país es positivo **(0.52)**, pero no significativo **(p = 0.555)**, indicando que, una vez controladas las percepciones individuales, las garantías percibidas a nivel nacional no explican de forma clara la orientación política.
 
 Desde el punto de vista de la calidad del ajuste, los R² ajustados son bajos en todos los modelos, pero el multinivel presenta una ligera mejora (R² ajustado = **0.064**), y, lo más importante, logra capturar la **estructura jerárquica real de los datos**. El modelo también arroja un ICC de **0.03**, lo que indica que un **3%** de la variación en la orientación política se debe a diferencias entre países, esto es bajo pero logra justificar un enfoque multinivel
 
@@ -318,14 +315,14 @@ Por lo tanto, esta comparación muestra según la problemática estudiada, que l
 
 # Bibliografía
 
-Castillo, J. C., Miranda, D. y Carrasco, D. (2012). Percepción de la desigualdad económica en Chile: medición, diferencias y determinantes. Psykhe, 21(1), 99-114. <http://dx.doi.org/10.4067/S0718-22282012000100007>
+Castillo, J. C., Miranda, D. y Carrasco, D. (2012). Percepción de la desigualdad económica en Chile: medición, diferencias y determinantes. *Psykhe, 21*(1), 99-114. <http://dx.doi.org/10.4067/S0718-22282012000100007>
 
-Corporación Latinobarómetro. (2023). Latinobarómetro 2023 \[Conjunto de datos\]. https://www.latinobarometro.org/latContents.jsp
+Corporación Latinobarómetro. (2023). *Latinobarómetro 2023* \[Conjunto de datos\]. https://www.latinobarometro.org/latContents.jsp
 
-Gómez, Á. y Huichi, C. (1999). Orientación política y racismo sutil y manifiesto: relaciones con la discriminación. Revista de psicología social, 14(2-3), 159-180. <https://doi.org/10.1174/021347499760259921>
+Gómez, Á. y Huichi, C. (1999). Orientación política y racismo sutil y manifiesto: relaciones con la discriminación. *Revista de psicología social, 14*(2-3), 159-180. <https://doi.org/10.1174/021347499760259921>
 
-Haye, A., Carvacho, H., Manzi, J. y Segovia, C. (2009). Relación entre orientación política y condición socioeconómica en la cultura política chilena: una aproximación desde la psicología política. Polis, 8(23), 351-384 <https://www.scielo.cl/?pid=S0718-65682009000200016&script=sci_abstract>
+Haye, A., Carvacho, H., Manzi, J. y Segovia, C. (2009). Relación entre orientación política y condición socioeconómica en la cultura política chilena: una aproximación desde la psicología política. *Polis, 8*(23), 351-384 <https://www.scielo.cl/?pid=S0718-65682009000200016&script=sci_abstract>
 
-Ubilluz, J. C. (2024). De cómo la singularidad de la derecha radical populista en América Latina permite repensar a la derecha radical populista global. Letras, 95(141), 12-39. http://dx.doi.org/10.30920/letras.95.141.2
+Ubilluz, J. C. (2024). De cómo la singularidad de la derecha radical populista en América Latina permite repensar a la derecha radical populista global. *Letras, 95*(141), 12-39. http://dx.doi.org/10.30920/letras.95.141.2
 
-Zovatto, D. (2022). El superciclo electoral latinoamericano 2021-2024. Diálogo político, 2, 6-17. <https://redaccion.dialogopolitico.org/wp-content/uploads/2022/10/1.-El-superciclo-electoral.-Zovatto.-Dia%CC%81logo-Poli%CC%81tico.-2-2022.pdf>
+Zovatto, D. (2022). El superciclo electoral latinoamericano 2021-2024. *Diálogo político, 2*, 6-17. <https://redaccion.dialogopolitico.org/wp-content/uploads/2022/10/1.-El-superciclo-electoral.-Zovatto.-Dia%CC%81logo-Poli%CC%81tico.-2-2022.pdf>
