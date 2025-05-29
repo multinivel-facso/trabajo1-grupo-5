@@ -106,19 +106,6 @@ htmlreg(list(reg_latbar2023_final1, reg_latbar2023_final2), doctype = FALSE) # p
 
 screenreg(list(reg_latbar2023_final1, reg_latbar2023_final2))
 
-# Emprirical Bayes
-
-# Paiís de ejemplo: Argentina
-
-attach(latbar2023_final)
-latbar2023_final %>% group_by(pais) %>% summarise(mean(orientacion_politica),count=n()) %>% slice(1:17)
-
-latbar2023_final %>% group_by(pais) %>% summarise(mean(orientacion_politica),count=n()) %>% filter(pais==Argentina)
-
-Argentina<- latbar2023_final[ which(latbar2023_final$pais==Argentina), ] # subset datos para Argentina
-Argentina
-dim(Argentina)
-
 ## Estimación correlación intraclase (ICC)-------------------------------------
 
 # Null model
@@ -129,6 +116,7 @@ summary(resultados_0)
 screenreg(resultados_0) # de library texreg
 
 reghelper::ICC(resultados_0)
+
 # Resultado ICC -> 0.03315684 (3.3%)
 
 ## Modelos multinivel-----------------------------------------------------------

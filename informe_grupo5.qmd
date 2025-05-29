@@ -36,7 +36,9 @@ pacman::p_load(tidyverse, # para sintaxis
                foreign,
                lattice,
                sjPlot,
-               ggeffects)            
+               ggeffects,
+               broom.mixed,
+               modelsummary)            
 
 options(scipen = 999) # para desactivar notacion cientifica
 rm(list = ls()) # para limpiar el entorno de trabajo
@@ -77,7 +79,7 @@ latbar2023_final %>%
 
 ```
 
-## Algún título para ICC y efectos aleatorios
+## Correlación intra clase
 
 aaaa
 
@@ -91,42 +93,131 @@ cat("Correlación Intra-clase:", icc_val, "\n")
 icc_val <- round(reghelper::ICC(resultados_0)*100, 2)
 cat("Coeficiente de correlación intra-clase redondeado:", icc_val, "\n")
 
+# Ordenar tabla
+
+icc_df <- data.frame(
+  Componente = "ICC",
+  Valor = round(reghelper::ICC(resultados_0) * 100, 2)
+)
+
+knitr::kable(icc_df, caption = "Coeficiente de Correlación Intra-clase (ICC)", digits = 2)
+```
+
+## Efectos aleatorios
+
+### Coeficientes aleatorios
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+
+reg_latbar2023_final0=lmer(orientacion_politica ~ 1 + ( 1 | pais), data = latbar2023_final)
+reg_latbar2023_final1=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 | pais), data = latbar2023_final)
+
+reg_latbar2023_final2=lmer(orientacion_politica ~ 1 + clase_scl + (1 +clase_scl | pais), data=latbar2023_final)
+htmlreg(list(reg_latbar2023_final1, reg_latbar2023_final2), doctype = FALSE) 
+
+screenreg(list(reg_latbar2023_final1, reg_latbar2023_final2))
+
+```
+
+```{r}
+extraer_info_modelo <- function(modelo) {
+  vc <- as.data.frame(VarCorr(modelo))
+  efectos <- data.frame(
+    Componente = paste0("Var: ", vc$grp, " ", vc$var1, ifelse(vc$var2 != vc$var1, paste0(":", vc$var2), "")),
+    Valor = round(vc$vcov, 2)
+  )
+  
+  estadisticas <- data.frame(
+    Componente = c("AIC", "BIC", "LogLik", "Num. obs.", "Num. grupos: pais"),
+    Valor = c(
+      round(AIC(modelo), 2),
+      round(BIC(modelo), 2),
+      round(logLik(modelo), 2),
+      nobs(modelo),
+      length(unique(modelo@frame$pais))
+    )
+  )
+  
+  bind_rows(efectos, estadisticas)
+}
+
+modelo1_df <- extraer_info_modelo(reg_latbar2023_final1) %>% rename(`Modelo 1` = Valor)
+modelo2_df <- extraer_info_modelo(reg_latbar2023_final2) %>% rename(`Modelo 2` = Valor)
+
+tabla_final <- full_join(modelo1_df, modelo2_df, by = "Componente")
+
+kable(tabla_final, caption = "Coeficiente aleatorio con clase social", digits = 2)
 ```
 
 # Modelos preliminares
 
-#Modelo nulo
+### Modelo nulo
 
-```{r modelo_nulo}
+```{r modelo_nulo, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+resultados_0 = lmer(orientacion_politica ~ 1 + (1 | pais), data = latbar2023_final)
+summary(resultados_0)
 
 screenreg(resultados_0)
-
 ```
 
-#Modelo 1 (Individual)
+```{r}
+lmer(orientacion_politica ~ 1 + (1 | pais), data = latbar2023_final) |>
+  tidy(effects = c("fixed", "ran_pars")) |>
+  arrange(desc(abs(estimate))) |>
+  select(term, estimate, std.error, statistic) |>
+  kable(digits = 3, caption = "Modelo Nulo")
+```
 
-```{r Modelo1}
+### Modelo 1 (Individual)
+
+```{r Modelo1, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_2 = lmer(orientacion_politica ~ 1 + clase_scl + perc_liber_pol + perc_desigualdad + (1 | pais), data = latbar2023_final)
 screenreg(resultados_2, naive=TRUE)
 ```
 
-#Modelo 2 (grupales)
-
 ```{r}
+broom.mixed::tidy(resultados_2, effects = "fixed") %>%
+  arrange(desc(abs(estimate))) %>%
+  select(term, estimate, std.error, statistic) %>%
+  kable(digits = 3, caption = "Modelo 1: clase social, percepción libertad política y percepción desigualdad")
+```
+
+### Modelo 2 (grupales)
+
+```{r Modelo2, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_4 = lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_4)
 ```
 
-Modelo 3 (individuales con grupales)
-
 ```{r}
+lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2023_final) |>
+  tidy(effects = c("fixed", "ran_pars")) |>
+  arrange(desc(abs(estimate))) |>
+  select(term, estimate, std.error, statistic) |>
+  kable(digits = 3, caption = "Modelo 2: garantías promedio")
+```
+
+### Modelo 3 (individuales con grupales)
+
+```{r Modelo3, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_5 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + perc_liber_pol + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_5)
 ```
 
-#Comparación de los tres modelos
-
 ```{r}
+resultados_5 <- lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + 
+                     perc_liber_pol + prom_garantias_pais + (1 | pais), 
+                     data = latbar2023_final)
+
+tidy(resultados_5, effects = c("fixed", "ran_pars")) |>
+  arrange(desc(abs(estimate))) |>
+  select(term, estimate, std.error, statistic) |>
+  kable(digits = 3, caption = "Modelo 3, unión de todas las variables")
+```
+
+### Comparación de los tres modelos
+
+```{r Modelo_comparativo,echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 #Comparación de regresiones
 
 reg_ind=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad, data=latbar2023_final)
@@ -137,16 +228,12 @@ reg_agg=lm(orientacion_politica ~ clase_scl + perc_liber_pol + perc_desigualdad 
 screenreg(list(reg_ind, reg_agg, resultados_5))
 ```
 
-#Efectos aleatorios
-
 ```{r}
-reg_latbar2023_final0=lmer(orientacion_politica ~ 1 + ( 1 | pais), data = latbar2023_final)
-
-reg_latbar2023_final1=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 | pais), data = latbar2023_final)
-
-reg_latbar2023_final2=lmer(orientacion_politica ~ 1 + clase_scl + ( 1 +clase_scl | pais), data=latbar2023_final)
-
-screenreg(list(reg_latbar2023_final0, reg_latbar2023_final1, reg_latbar2023_final2))
+tab_model(reg_ind, reg_agg, resultados_5,
+  show.ci = FALSE,
+  show.se = TRUE,
+  dv.labels = c("Individual", "Agregado", "Multinivel"),
+  title = "Comparación de Modelos: Individual, Agregado y Multinivel")
 ```
 
 aaaaa
