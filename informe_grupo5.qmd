@@ -199,9 +199,26 @@ El intercepto fijo obtenido es de **5.369**, lo que representa el promedio gener
 
 En cuanto a los efectos aleatorios, la desviación estándar del intercepto por país es de **0.552**, lo que indica que existen diferencias moderadas entre países respecto a su orientación política promedio. Por otro lado, la desviación estándar a nivel individual es de **2.981**, lo que muestra una alta variabilidad en la orientación política entre personas dentro de cada país.
 
-### Modelo 1 (Individual)
+### Modelo 1 (1) (Individual)
 
 ```{r Modelo1, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+resultados_1 = lmer(orientacion_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
+```
+
+```{r}
+broom.mixed::tidy(resultados_1, effects = "fixed") %>%
+  arrange(desc(abs(estimate))) %>%
+  select(term, estimate, std.error, statistic) %>%
+  kable(digits = 3, caption = "Modelo: clase social y orientación política")
+```
+
+Los resultados muestran un efecto positivo y significativo de la clase social (coeficiente = **0.15**, *p* \< **0.001**), lo que indica que, en promedio las personas que se perciben en clases sociales más altas tienden a ubicarse más hacia la derecha política. El intercepto promedio es **5.14**, lo que refleja una orientación política más al centro en el espectro ideológico cuando la clase social es baja.
+
+La varianza entre países (**0.31**) señala que existen diferencias moderadas en las medias de orientación política según el país de residencia. En conjunto, este modelo sugiere que la clase social es un factor significativo en la autoubicación política en América Latina, siendo un aporte relevante para entender los alineamientos ideológicos en el contexto del "superciclo electoral" y los cambios recientes en la región.
+
+### Modelo nivel 1 (2) (Individual)
+
+```{r Modelo2, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_2 = lmer(orientacion_politica ~ 1 + clase_scl + perc_liber_pol + perc_desigualdad + (1 | pais), data = latbar2023_final)
 screenreg(resultados_2, naive=TRUE)
 ```
@@ -210,17 +227,7 @@ screenreg(resultados_2, naive=TRUE)
 broom.mixed::tidy(resultados_2, effects = "fixed") %>%
   arrange(desc(abs(estimate))) %>%
   select(term, estimate, std.error, statistic) %>%
-  kable(digits = 3, caption = "Modelo 1: clase social, percepción libertad política y percepción desigualdad")
-```
-
-```{r}
-resultados_1 = lmer(orientacion_politica ~ 1 + clase_scl + (1 | pais), data = latbar2023_final)
-
-broom.mixed::tidy(resultados_1, effects = "fixed") %>%
-  arrange(desc(abs(estimate))) %>%
-  select(term, estimate, std.error, statistic) %>%
-  kable(digits = 3, caption = "Modelo: clase social y orientación política")
-
+  kable(digits = 3, caption = "Modelo 2: clase social, percepción libertad política y percepción desigualdad")
 ```
 
 Este modelo de nivel individual analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política, influyen en la orientación política controlando por país con un intercepto aleatorio. El intercepto estimado es **4.388**, indicando una orientación promedio cercana al centro-izquierda alejándose un poco de lo visto en el Modelo nulo. Todos los predictores tienen efectos positivos y significativos, lo que sugiere que mayores niveles en estas variables se asocian con una orientación más hacia la derecha.
@@ -229,9 +236,9 @@ Específicamente, una mayor percepción de desigualdad (**0.193**), mayor percep
 
 Estos resultados sostienen algunas de las ideas planteadas en la porblemática a estudiar, al mostrar que factores individuales como clase y percepciones contextuales influyen en la orientación política. Además, justifican el enfoque multinivel al permitir controlar las diferencias entre países y avanzar hacia modelos más complejos que capten mejor la diversidad regional.
 
-### Modelo 2 (grupales)
+### Modelo nivel 2 (grupales)
 
-```{r Modelo2, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+```{r Modelo3, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_4 = lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_4)
 ```
@@ -241,7 +248,7 @@ lmer(orientacion_politica ~ 1 + prom_garantias_pais + (1 | pais), data = latbar2
   tidy(effects = c("fixed", "ran_pars")) |>
   arrange(desc(abs(estimate))) |>
   select(term, estimate, std.error, statistic) |>
-  kable(digits = 3, caption = "Modelo 2: garantías promedio")
+  kable(digits = 3, caption = "Modelo 3: garantías promedio")
 ```
 
 Este modelo de nivel grupal, incorpora el promedio de garantías ofrecidas por cada país como variable contextual para explicar la orientación política manteniendo un intercepto aleatorio por país. A diferencia de los modelos centrados en factores individuales, este busca identificar si las condiciones estructurales nacionales influyen en la ubicación ideológica de los residentes.
@@ -252,9 +259,9 @@ La desviación estándar del intercepto por país **(0.541)** indica diferencias
 
 En el contexto del "superciclo electoral" latinoamericano, este modelo ofrece una primera aproximación al rol del contexto nacional. Aunque el efecto de las garantías percibidas no es concluyente, apunta a que las condiciones institucionales podrían influir en la orientación política, y refuerza la necesidad de integrar variables contextuales e individuales para entender mejor las actitudes políticas en la región.
 
-### Modelo 3 (individuales con grupales)
+### Modelo 4 (individuales con grupales)
 
-```{r Modelo3, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+```{r Modelo4, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 resultados_5 = lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad + perc_liber_pol + prom_garantias_pais + (1 | pais), data = latbar2023_final)
 screenreg(resultados_5)
 ```
@@ -267,7 +274,7 @@ resultados_5 <- lmer(orientacion_politica ~ 1 + clase_scl + perc_desigualdad +
 tidy(resultados_5, effects = c("fixed", "ran_pars")) |>
   arrange(desc(abs(estimate))) |>
   select(term, estimate, std.error, statistic) |>
-  kable(digits = 3, caption = "Modelo 3, unión variables individuales y grupales")
+  kable(digits = 3, caption = "Modelo 4, unión variables individuales y grupales")
 ```
 
 El modelo incluye todas las variables trabajadas y se mantiene el país como variable de anidación para controlar por diferencias estructurales nacionales.
