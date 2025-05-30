@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Cahuil Ortiz, Juan Prado y Angela Valeria">
+
+<title>Análisis multivariado de la orientación política en América Latina</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="informe_grupo5_files/libs/clipboard/clipboard.min.js"></script>
+<script src="informe_grupo5_files/libs/quarto-html/quarto.js"></script>
+<script src="informe_grupo5_files/libs/quarto-html/popper.min.js"></script>
+<script src="informe_grupo5_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="informe_grupo5_files/libs/quarto-html/anchor.min.js"></script>
+<link href="informe_grupo5_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="informe_grupo5_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="informe_grupo5_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="informe_grupo5_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="informe_grupo5_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="informe_grupo5_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="informe_grupo5_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Análisis multivariado de la orientación política en América Latina</h1>
+<p class="subtitle lead">Análisis multinivel 2025</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Cahuil Ortiz, Juan Prado y Angela Valeria </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">28 de mayo de 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="planteamiento-del-problema" class="level1">
+<h1>Planteamiento del problema</h1>
+<p>El continente latinoamericano ha experimentado cambios políticos considerables en los últimos años. Dentro del periodo 2021 al 2024 ocurre el “superciclo electoral” latinoamericano, donde 17 países han celebrado elecciones presidenciales y parlamentarias renovando el escenario gubernamental de la región (Zovatto, 2022). Esta renovación se enmarca dentro del agitado clima político de los años anteriores: las manifestaciones contra la violencia en Ecuador, contra el poco transparente&nbsp;proceso electoral tanto en Bolivia como en Perú, el “estallido social” en Chile, entre otros, son antecedentes importantes para entender un posible giro en el escenario político del continente.&nbsp;</p>
+<p>En este contexto surge la necesidad de un análisis respecto a la orientación política que considere al continente entero y posibles transformaciones políticas en conjunto. Siendo fundamental tener en cuenta las garantías que ofrece a sus ciudadanos, pues fueron las principales consignas de las movilizaciones en el periodo 2019 a 2022 (Zovatto, 2022). Asimismo, se considera importante otros factores que se ha visto que podrían afectar a la orientación política significativamente, como la percepción de desigualdad (Castillo et al., 2012), clase social (Haye et al., 2008), actitudes racistas (Gómez y Huici, 1999), entre otros. Además, estas temáticas cobran mayor relevancia al estar presentes en discursos políticos de derecha radical actuales, movimientos cada vez mayores en la región (Ubilluz, 2024).&nbsp;</p>
+<p>El objetivo de este estudio es explorar las relaciones entre la orientación política y clase social, percepciones de desigualdad, migración, garantías del país, entre otras, teniendo en cuenta la diferencia del país de residencia y las garantías que ofrece este. Este análisis utiliza una metodología multinivel utilizando la base de datos de Latinobarómetro del 2023 (Corporación Latinobarómetro, 2023). Se analizará en un primer nivel las percepciones de la situación país (migración, desigualdad y libertad política) y clase social; y en un segundo nivel el país de residencia y las garantías que presente este a sus ciudadanos.</p>
+</section>
+<section id="preguntas-de-lógica-multinivel" class="level1">
+<h1>Preguntas de lógica multinivel</h1>
+<p>Para efectos de este trabajo investigativo se plantean tres preguntas de investigación: dos de primer nivel y una de segundo nivel.</p>
+<p><strong>Preguntas de primer nivel</strong>:</p>
+<p>• ¿Existe una relación significativa entre la clase social y la orientación política de personas residentes en los países latinoamericanos?</p>
+<p>• ¿Existe una relación significativa entre el nivel de percepción de desigualdad y la orientación política de personas residentes en los países latinoamericanos?</p>
+<p><strong>Pregunta de segundo nivel:</strong></p>
+<p>• ¿Las garantías de derechos, oportunidades, libertades y seguridades entregadas por el país tienen un efecto en la orientación política de sus habitantes?</p>
+</section>
+<section id="descripción-de-los-datos" class="level1">
+<h1>Descripción de los datos</h1>
+<p>Como se mencionó anteriormente, la base de datos utilizada es la encuesta de opinión pública latinoamericana Latinobarómetro del año 2023, de la corporación homónima. La base se compone de 274 variables y 19205 observaciones. Se seleccionaron 18 variables en una base reducida y eliminaron casos perdidos, quedando en 14469 observaciones (nivel 1). Se creó la variable <em>garantias_pais</em>, un índice compuesto por la suma de 13 variables (<em>P41ST.A</em> a <em>P41ST.M</em>), dividido por 13. Posteriormente se creó otra base reducida excluyendo las variables que componen el índice, y agregando una variable de nivel 2 del promedio de <em>garantias_pais</em> por país (<em>prom_garantias_pais</em>), quedando finalmente con 8 variables. A partir de esta, se creó una base agrupada por la variable <em>pais</em>, quedando con un N=17 en el nivel 2.</p>
+<section id="descripción-de-variables" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-de-variables">Descripción de variables</h2>
+<p>Las variables que se utilizaron para el análisis son:</p>
+<ul>
+<li><p><strong>Clase social</strong> (<em>clase_scl</em>): clase social en la que pertenecen los encuestados. Valores: “Baja” (0), “Media Baja” (1), “Media” (2), “Media Alta” (3) y “Alta” (4).</p></li>
+<li><p><strong>Orientación política</strong> (<em>orientacion_politica</em>): donde se ubican políticamente los encuestados. Toma valores entre 0 y 10, siendo 0 “Izquierda” y 10 “Derecha” (media 5.36; desviación estándar [DE] 3.03; mediana 5).</p></li>
+<li><p><strong>Percepción de desigualdad</strong> (<em>perc_desigualdad</em>): qué tan aceptable es el nivel de desigualdad en el país. Toma valores entre 0 y 9, siendo 0 “Completamente inaceptable” y 9 “Completamente aceptable” (media 3.48; DE 2.86; mediana 4)</p></li>
+<li><p><strong>Percepción de migración</strong> (<em>perc_migracion</em>): si la llegada de inmigrantes lo beneficia (2), ni beneficia ni perjudica (1) o perjudica (0). Un 60.92% reporta que la llegada de inmigrantes lo perjudica, mientras que un 25.94% reportan que los beneficia.</p></li>
+<li><p><strong>País</strong> (<em>pais</em>): país de procedencia de la persona. Es la variable de clúster en cuyas opciones de respuesta corresponden a 17 países de América Latina. Tiene un promedio de 851 personas por país (min 680 - max 1002)</p></li>
+<li><p><strong>(Promedio de) Garantías del país</strong> (<em>garantias_pais</em> y <em>prom_garantias_pais</em>): índice explicado anteriormente que representa el punto en que ciertas libertades, derechos, oportunidades y seguridades están garantizadas en el país. Cada una de las 13 variables toma valores de 0 a 3, siendo 0 “Para nada garantizadas” y 3 “Completamente garantizadas”. La suma de las 13 variables se dividió en 13 para obtener el promedio de garantías que declara cada persona (0 menos garantías y 3 más garantías; media 1.48; DE 0.6; mediana 1.46). Luego se calculó el promedio de esta variable por país, quedando la variable <em>prom_garantias_pais</em> (min 1.25; max 1.82; media 1.48; DE 0.13; mediana 1.45)</p></li>
+<li><p><strong>Percepción de libertad política</strong> (<em>perc_liber_pol</em>): la percepción de las personas sobre la libertad que tienen de participar en política en su país. Esta variable primero se utilizó para construir <em>garantias_pais</em> y después se analizó independientemente.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">vars</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">n</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">sd</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">trimmed</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">mad</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">max</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">range</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">skew</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">kurtosis</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">se</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">clase_scl</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">1.5162071</td>
+<td style="text-align: right;">0.9680209</td>
+<td style="text-align: right;">2.000000</td>
+<td style="text-align: right;">1.4798307</td>
+<td style="text-align: right;">1.4826000</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">4.000000</td>
+<td style="text-align: right;">4.0000000</td>
+<td style="text-align: right;">0.1841844</td>
+<td style="text-align: right;">-0.1020866</td>
+<td style="text-align: right;">0.0080476</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">orientacion_politica</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">5.3574539</td>
+<td style="text-align: right;">3.0253428</td>
+<td style="text-align: right;">5.000000</td>
+<td style="text-align: right;">5.4467479</td>
+<td style="text-align: right;">2.9652000</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">10.000000</td>
+<td style="text-align: right;">10.0000000</td>
+<td style="text-align: right;">-0.0920168</td>
+<td style="text-align: right;">-0.7473935</td>
+<td style="text-align: right;">0.0251510</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">perc_desigualdad</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">3.4817887</td>
+<td style="text-align: right;">2.8599758</td>
+<td style="text-align: right;">4.000000</td>
+<td style="text-align: right;">3.2467824</td>
+<td style="text-align: right;">2.9652000</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">9.000000</td>
+<td style="text-align: right;">9.0000000</td>
+<td style="text-align: right;">0.3838273</td>
+<td style="text-align: right;">-0.8865235</td>
+<td style="text-align: right;">0.0237762</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">perc_liber_pol</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">1.5719124</td>
+<td style="text-align: right;">0.9493106</td>
+<td style="text-align: right;">2.000000</td>
+<td style="text-align: right;">1.5898765</td>
+<td style="text-align: right;">1.4826000</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">3.000000</td>
+<td style="text-align: right;">3.0000000</td>
+<td style="text-align: right;">-0.0660933</td>
+<td style="text-align: right;">-0.9172096</td>
+<td style="text-align: right;">0.0078920</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">perc_migracion</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">0.6501486</td>
+<td style="text-align: right;">0.8638699</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">0.5627537</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">2.000000</td>
+<td style="text-align: right;">2.0000000</td>
+<td style="text-align: right;">0.7386084</td>
+<td style="text-align: right;">-1.2547251</td>
+<td style="text-align: right;">0.0071817</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">garantias_pais</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">1.4781575</td>
+<td style="text-align: right;">0.6047173</td>
+<td style="text-align: right;">1.461539</td>
+<td style="text-align: right;">1.4617644</td>
+<td style="text-align: right;">0.5702308</td>
+<td style="text-align: right;">0.000000</td>
+<td style="text-align: right;">3.000000</td>
+<td style="text-align: right;">3.0000000</td>
+<td style="text-align: right;">0.2166560</td>
+<td style="text-align: right;">-0.1085848</td>
+<td style="text-align: right;">0.0050273</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prom_garantias_pais</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">14469</td>
+<td style="text-align: right;">1.4781575</td>
+<td style="text-align: right;">0.1321829</td>
+<td style="text-align: right;">1.452643</td>
+<td style="text-align: right;">1.4755483</td>
+<td style="text-align: right;">0.1680097</td>
+<td style="text-align: right;">1.246767</td>
+<td style="text-align: right;">1.823285</td>
+<td style="text-align: right;">0.5765183</td>
+<td style="text-align: right;">0.3980812</td>
+<td style="text-align: right;">0.3410811</td>
+<td style="text-align: right;">0.0010989</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="correlación-intra-clase" class="level2">
+<h2 class="anchored" data-anchor-id="correlación-intra-clase">Correlación intra clase</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Correlación Intra-clase: 0.03315684 </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coeficiente de correlación intra-clase redondeado: 3.32 </code></pre>
+</div>
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Coeficiente de Correlación Intra-clase (ICC)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Componente</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">ICC</td>
+<td style="text-align: right;">3.32</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>El coeficiente de correlación intra clase (ICC) del modelo es de <strong>0.033</strong>, lo que indica que sólo el <strong>3.3%</strong> de la varianza en la orientación política se explica por diferencias entre países. El <strong>96.7%</strong> restante se debe a variación entre individuos dentro de los países.</p>
+<p>Este bajo ICC sugiere que la orientación política varía mucho más entre personas de un mismo país que entre países diferentes. Aunque la varianza entre países es reducida, el uso de un modelo multinivel sigue siendo apropiado para reflejar la estructura jerárquica de los datos.</p>
+</section>
+<section id="efectos-aleatorios" class="level2">
+<h2 class="anchored" data-anchor-id="efectos-aleatorios">Efectos aleatorios</h2>
+<section id="coeficientes-aleatorios" class="level3">
+<h3 class="anchored" data-anchor-id="coeficientes-aleatorios">Coeficientes aleatorios</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Coeficiente aleatorio con clase social</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Componente</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Modelo 1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Modelo 2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Var: pais (Intercept)NA</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0.35</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Var: Residual NANA</td>
+<td style="text-align: right;">8.87</td>
+<td style="text-align: right;">8.86</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AIC</td>
+<td style="text-align: right;">72707.90</td>
+<td style="text-align: right;">72707.70</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BIC</td>
+<td style="text-align: right;">72738.22</td>
+<td style="text-align: right;">72753.18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LogLik</td>
+<td style="text-align: right;">-36349.95</td>
+<td style="text-align: right;">-36347.85</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Num. obs.</td>
+<td style="text-align: right;">14469.00</td>
+<td style="text-align: right;">14469.00</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Num. grupos: pais</td>
+<td style="text-align: right;">17.00</td>
+<td style="text-align: right;">17.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Var: pais clase_sclNA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Var: pais (Intercept):clase_scl</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">-0.02</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>En el contexto del “superciclo electoral” latinoamericano y los recientes cambios políticos en la región, este análisis multinivel examina cómo la clase social se relaciona con la orientación política, considerando las diferencias entre países.</p>
+<p>El modelo con pendiente aleatoria muestra que la orientación política promedio varía entre países (varianza del intercepto = <strong>0.35</strong>), lo que refleja contextos ideológicos nacionales distintos. Además, la relación entre clase social y orientación política también varía entre países, aunque de forma leve (varianza de la pendiente = <strong>0.01</strong>), lo que sugiere que el efecto de clase no es igual en toda la región.</p>
+<p>La covarianza negativa entre intercepto y pendiente (<strong>-0.02</strong>) indica que en países más inclinados a la derecha, la influencia de la clase social sobre la orientación política tiende a ser más débil. Este conjunto de datos muestran que la relación entre clase social y orientación política está condicionada por el país de residencia, y que la estructura política regional no puede entenderse sin considerar las variaciones de cada nación.</p>
+</section>
+</section>
+</section>
+<section id="modelos-preliminares" class="level1">
+<h1>Modelos preliminares</h1>
+<section id="modelo-nulo" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-nulo">Modelo nulo</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Modelo Nulo</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">5.369</td>
+<td style="text-align: right;">0.136</td>
+<td style="text-align: right;">39.418</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sd__Observation</td>
+<td style="text-align: right;">2.981</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">sd__(Intercept)</td>
+<td style="text-align: right;">0.552</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Este modelo incluye sólo un intercepto fijo y un intercepto aleatorio por país, lo que permite estimar la variación en la orientación política tanto entre países como entre individuos dentro de cada país.</p>
+<p>El intercepto fijo obtenido es de <strong>5.369</strong>, lo que representa el promedio general de orientación política en la muestra, en una escala donde 0 indica posicionamiento a la izquierda y 10 a la derecha. Este valor sugiere que, en promedio los encuestados tienden a ubicarse levemente hacia el centro-derecha del espectro político.</p>
+<p>En cuanto a los efectos aleatorios, la desviación estándar del intercepto por país es de <strong>0.552</strong>, lo que indica que existen diferencias moderadas entre países respecto a su orientación política promedio. Por otro lado, la desviación estándar a nivel individual es de <strong>2.981</strong>, lo que muestra una alta variabilidad en la orientación política entre personas dentro de cada país.</p>
+</section>
+<section id="modelo-1-1-individual" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-1-1-individual">Modelo 1 (1) (Individual)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Modelo: clase social y orientación política</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">5.135</td>
+<td style="text-align: right;">0.143</td>
+<td style="text-align: right;">36.016</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">clase_scl</td>
+<td style="text-align: right;">0.154</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">5.953</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Los resultados muestran un efecto positivo y significativo de la clase social (coeficiente = <strong>0.15</strong>, <em>p</em> &lt; <strong>0.001</strong>), lo que indica que, en promedio las personas que se perciben en clases sociales más altas tienden a ubicarse más hacia la derecha política. El intercepto promedio es <strong>5.14</strong>, lo que refleja una orientación política más al centro en el espectro ideológico cuando la clase social es baja.</p>
+<p>La varianza entre países (<strong>0.31</strong>) señala que existen diferencias moderadas en las medias de orientación política según el país de residencia. En conjunto, este modelo sugiere que la clase social es un factor significativo en la autoubicación política en América Latina, siendo un aporte relevante para entender los alineamientos ideológicos en el contexto del “superciclo electoral” y los cambios recientes en la región.</p>
+</section>
+<section id="modelo-nivel-1-2-individual" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-nivel-1-2-individual">Modelo nivel 1 (2) (Individual)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Modelo 2: clase social, percepción libertad política y percepción desigualdad</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.388</td>
+<td style="text-align: right;">0.132</td>
+<td style="text-align: right;">33.310</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">perc_desigualdad</td>
+<td style="text-align: right;">0.193</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">21.543</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">perc_liber_pol</td>
+<td style="text-align: right;">0.100</td>
+<td style="text-align: right;">0.027</td>
+<td style="text-align: right;">3.790</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">clase_scl</td>
+<td style="text-align: right;">0.097</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">3.804</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Este modelo de nivel individual analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política, influyen en la orientación política controlando por país con un intercepto aleatorio. El intercepto estimado es <strong>4.388</strong>, indicando una orientación promedio cercana al centro-izquierda alejándose un poco de lo visto en el Modelo nulo. Todos los predictores tienen efectos positivos y significativos, lo que sugiere que mayores niveles en estas variables se asocian con una orientación más hacia la derecha.</p>
+<p>Específicamente, una mayor percepción de desigualdad (<strong>0.193</strong>), mayor percepción de libertad política ( <strong>0.100</strong>) y una clase social más alta (<strong>0.097</strong>) predicen una orientación política más conservadora. Esto indica que las percepciones sobre el entorno y la posición social juegan un rol importante en la definición ideológica.</p>
+<p>Estos resultados sostienen algunas de las ideas planteadas en la porblemática a estudiar, al mostrar que factores individuales como clase y percepciones contextuales influyen en la orientación política. Además, justifican el enfoque multinivel al permitir controlar las diferencias entre países y avanzar hacia modelos más complejos que capten mejor la diversidad regional.</p>
+</section>
+<section id="modelo-nivel-2-grupales" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-nivel-2-grupales">Modelo nivel 2 (grupales)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Modelo 3: garantías promedio</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">3.481</td>
+<td style="text-align: right;">1.478</td>
+<td style="text-align: right;">2.354</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sd__Observation</td>
+<td style="text-align: right;">2.981</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prom_garantias_pais</td>
+<td style="text-align: right;">1.272</td>
+<td style="text-align: right;">0.992</td>
+<td style="text-align: right;">1.282</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sd__(Intercept)</td>
+<td style="text-align: right;">0.541</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>Este modelo de nivel grupal, incorpora el promedio de garantías ofrecidas por cada país como variable contextual para explicar la orientación política manteniendo un intercepto aleatorio por país. A diferencia de los modelos centrados en factores individuales, este busca identificar si las condiciones estructurales nacionales influyen en la ubicación ideológica de los residentes.</p>
+<p>El intercepto estimado es <strong>3.481</strong>, mientras que el coeficiente de promedio de garantías es <strong>1.272</strong>, lo que sugiere que en países donde se perciben más garantías, las personas tienden a ubicarse más hacia la derecha. Sin embargo, este efecto no es estadísticamente significativo ya que al calcular la prueba t esta da <strong>1.28</strong>, por lo tanto no se puede afirmar con certeza que exista una relación generalizable.</p>
+<p>La desviación estándar del intercepto por país <strong>(0.541)</strong> indica diferencias moderadas entre países en la orientación política promedio, mientras que la variación individual dentro de los países sigue siendo alta <strong>(2.981)</strong>.</p>
+<p>En el contexto del “superciclo electoral” latinoamericano, este modelo ofrece una primera aproximación al rol del contexto nacional. Aunque el efecto de las garantías percibidas no es concluyente, apunta a que las condiciones institucionales podrían influir en la orientación política, y refuerza la necesidad de integrar variables contextuales e individuales para entender mejor las actitudes políticas en la región.</p>
+</section>
+<section id="modelo-4-individuales-con-grupales" class="level3">
+<h3 class="anchored" data-anchor-id="modelo-4-individuales-con-grupales">Modelo 4 (individuales con grupales)</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<caption>Modelo 4, unión variables individuales y grupales</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">term</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">estimate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">std.error</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">3.611</td>
+<td style="text-align: right;">1.322</td>
+<td style="text-align: right;">2.732</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sd__Observation</td>
+<td style="text-align: right;">2.929</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">prom_garantias_pais</td>
+<td style="text-align: right;">0.524</td>
+<td style="text-align: right;">0.887</td>
+<td style="text-align: right;">0.591</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">sd__(Intercept)</td>
+<td style="text-align: right;">0.482</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">perc_desigualdad</td>
+<td style="text-align: right;">0.193</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;">21.507</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">perc_liber_pol</td>
+<td style="text-align: right;">0.100</td>
+<td style="text-align: right;">0.027</td>
+<td style="text-align: right;">3.773</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clase_scl</td>
+<td style="text-align: right;">0.097</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">3.808</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>El modelo incluye todas las variables trabajadas y se mantiene el país como variable de anidación para controlar por diferencias estructurales nacionales.</p>
+<p>El intercepto estimado es <strong>3.611</strong>, lo que representa la orientación política promedio cuando todas las variables predictoras están en su valor más bajo. La desviación estándar del intercepto por país <strong>(0.482)</strong> indica que siguen existiendo diferencias entre países, aunque moderadas, mientras que la variabilidad individual sigue siendo alta <strong>(2.929)</strong>, lo que confirma que la mayor parte de la variación ocurre dentro de los países.</p>
+<p>A nivel individual, todos los predictores mantienen efectos positivos y significativos: la percepción de desigualdad <strong>(0.193)</strong>, la percepción de libertad política <strong>(0.100)</strong> y la clase social <strong>(0.097)</strong> están asociadas con una mayor orientación hacia la derecha. Estos hallazgos son consistentes con los modelos previos y apoyan la idea de que los factores individuales influyen significativamente en las posturas ideológicas de los ciudadanos.</p>
+<p>En cambio, el efecto del promedio de garantías percibidas por país es positivo (<strong>0.524</strong>), pero no estadísticamente significativo, ya que al realizarle una prueba t, ésta da 0.59, lo que sugiere que, una vez controladas las variables individuales, esta variable contextual no tiene un impacto claro o robusto sobre la orientación política.</p>
+<p>En conjunto, este modelo reafirma que las percepciones personales y la posición de clase tienen un peso importante en la configuración ideológica en América Latina, mientras que las condiciones estructurales nacionales, como las garantías percibidas, parecen tener un efecto más débil o indirecto. Estos resultados subrayan la necesidad de considerar tanto los factores individuales como los contextos nacionales para comprender el comportamiento político en un periodo de alta volatilidad y transformación en la región.</p>
+</section>
+<section id="comparación-de-los-tres-modelos" class="level3">
+<h3 class="anchored" data-anchor-id="comparación-de-los-tres-modelos">Comparación de los tres modelos</h3>
+<div class="cell">
+<div class="cell-output-display">
+
+<table style="border-collapse:collapse; border:none;">
+<caption style="font-weight: bold; text-align:left;">Comparación de Modelos: Individual, Agregado y Multinivel</caption>
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Individual</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Agregado</th>
+<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">Multinivel</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col8">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col9">std. Error</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  0">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">4.38</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">5.85</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.97</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7"><strong>0.012</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">3.61</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">1.32</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>0.006</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">clase scl</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.08</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.003</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.89</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.236</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">perc liber pol</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.09</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.56</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.591</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.03</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">perc desigualdad</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.51</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.26</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.069</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.19</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.01</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0"><strong>&lt;0.001</strong></td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">prom garantias pais</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.99</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.96</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">0.624</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.52</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">0.89</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">0.555</td>
+</tr>
+<tr>
+<td colspan="10" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">8.58</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.23 <sub>pais</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.03</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">&nbsp;</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">17 <sub>pais</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">14469</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">17</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">14469</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">R<sup>2</sup> / R<sup>2</sup> adjusted</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.041 / 0.041</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.438 / 0.251</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">0.039 / 0.064</td>
+</tr>
+
+</tbody></table>
+
+</div>
+</div>
+<p>En esta unión de modelos se compara un modelo individual, uno agregado a nivel país y un modelo multinivel, este último integrando simultáneamente factores individuales y contextuales.</p>
+<p>En el modelo individual, se analiza cómo la clase social, la percepción de desigualdad y la percepción de libertad política influyen en la orientación política, sin considerar las diferencias entre países. Todas las variables muestran efectos positivos y significativos: clase social (<strong>0.08</strong>), percepción de libertad política (<strong>0.09</strong>) y percepción de desigualdad (<strong>0.21</strong>). Esto indica que, a nivel individual estas variables se asocian con una mayor orientación hacia la derecha.</p>
+<p>El modelo agregado, en cambio, utiliza promedios por país y pierde completamente la variabilidad individual. Aquí, ninguno de los predictores resulta estadísticamente significativo, con coeficientes inconsistentes e incluso opuestos en el caso de la clase social <strong>(-1.11 p = 0.236)</strong>. Esto evidencia que los promedios nacionales pueden ocultar dinámicas importantes que ocurren dentro de los países.</p>
+<p>El modelo multinivel, que integra ambas dimensiones, ofrece una visión más precisa. Mantiene la significancia de todos los predictores individuales: clase social <strong>(0.10)</strong>, percepción de libertad política <strong>(0.10)</strong> y percepción de desigualdad <strong>(0.19)</strong>, todos con <strong>p &lt; 0.001</strong>. El efecto de promedio de garantías por país es positivo <strong>(0.52)</strong>, pero no significativo <strong>(p = 0.555)</strong>, indicando que, una vez controladas las percepciones individuales, las garantías percibidas a nivel nacional no explican de forma clara la orientación política.</p>
+<p>Desde el punto de vista de la calidad del ajuste, los R² ajustados son bajos en todos los modelos, pero el multinivel presenta una ligera mejora (R² ajustado = <strong>0.064</strong>), y, lo más importante, logra capturar la <strong>estructura jerárquica real de los datos</strong>. El modelo también arroja un ICC de <strong>0.03</strong>, lo que indica que un <strong>3%</strong> de la variación en la orientación política se debe a diferencias entre países, esto es bajo pero logra justificar un enfoque multinivel</p>
+<p>Por lo tanto, esta comparación muestra según la problemática estudiada, que los factores individuales como la clase social y las percepciones sobre desigualdad y libertad política logran ser significativos para entender la orientación política en América Latina. Sin embargo, al compararlo con modelos más complejos, se observa que algunas relaciones que parecen significativas aquí podrían no sostenerse al controlar por la variación entre países, lo que muestra las limitaciones de asumir efectos homogéneos en toda la región.</p>
+</section>
+</section>
+<section id="bibliografía" class="level1">
+<h1>Bibliografía</h1>
+<p>Castillo, J. C., Miranda, D. y Carrasco, D. (2012). Percepción de la desigualdad económica en Chile: medición, diferencias y determinantes. <em>Psykhe, 21</em>(1), 99-114. <a href="http://dx.doi.org/10.4067/S0718-22282012000100007" class="uri">http://dx.doi.org/10.4067/S0718-22282012000100007</a></p>
+<p>Corporación Latinobarómetro. (2023). <em>Latinobarómetro 2023</em> [Conjunto de datos]. https://www.latinobarometro.org/latContents.jsp</p>
+<p>Gómez, Á. y Huichi, C. (1999). Orientación política y racismo sutil y manifiesto: relaciones con la discriminación. <em>Revista de psicología social, 14</em>(2-3), 159-180. <a href="https://doi.org/10.1174/021347499760259921" class="uri">https://doi.org/10.1174/021347499760259921</a></p>
+<p>Haye, A., Carvacho, H., Manzi, J. y Segovia, C. (2009). Relación entre orientación política y condición socioeconómica en la cultura política chilena: una aproximación desde la psicología política. <em>Polis, 8</em>(23), 351-384 <a href="https://www.scielo.cl/?pid=S0718-65682009000200016&amp;script=sci_abstract" class="uri">https://www.scielo.cl/?pid=S0718-65682009000200016&amp;script=sci_abstract</a></p>
+<p>Ubilluz, J. C. (2024). De cómo la singularidad de la derecha radical populista en América Latina permite repensar a la derecha radical populista global. <em>Letras, 95</em>(141), 12-39. http://dx.doi.org/10.30920/letras.95.141.2</p>
+<p>Zovatto, D. (2022). El superciclo electoral latinoamericano 2021-2024. <em>Diálogo político, 2</em>, 6-17. <a href="https://redaccion.dialogopolitico.org/wp-content/uploads/2022/10/1.-El-superciclo-electoral.-Zovatto.-Dia%CC%81logo-Poli%CC%81tico.-2-2022.pdf" class="uri">https://redaccion.dialogopolitico.org/wp-content/uploads/2022/10/1.-El-superciclo-electoral.-Zovatto.-Dia%CC%81logo-Poli%CC%81tico.-2-2022.pdf</a></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
